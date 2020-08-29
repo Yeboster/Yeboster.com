@@ -2,8 +2,8 @@ use Mix.Config
 
 # Configure your database
 config :yeboster, Yeboster.Repo,
-  username: "postgres",
-  password: "postgres",
+  username: "yeboster",
+  password: "changeme",
   database: "yeboster_dev",
   hostname: "localhost",
   show_sensitive_data_on_connection_error: true,
