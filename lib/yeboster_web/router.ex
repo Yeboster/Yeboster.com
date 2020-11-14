@@ -17,6 +17,9 @@ defmodule YebosterWeb.Router do
     pipe_through :browser
 
     get "/", PageController, :index
+    get "/about", PageController, :about
+    get "/inspiration", PageController, :inspiration
+    get "/contact", PageController, :contact
   end
 
   # Other scopes may use custom stacks.
