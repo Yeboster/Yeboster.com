@@ -7,10 +7,8 @@ help: ## Show this help
 serve: db-run deps ## Serve dev application
 	mix phx.server
 
-deps: deps-mix deps-node ## Setup dependencies
-
-deps-mix: ## Setup mix dependencies
-	mix deps.get --force
+shell: db-run deps ## Run project shell
+	iex -S mix
 
 db-create: ## Create db
 	mix ecto.create
@@ -18,8 +16,14 @@ db-create: ## Create db
 db-shell: ## Opens a psql shell
 	docker-compose run --rm -e 'PGPASSWORD=$(PGPASSWORD)' db psql -h db -U yeboster
 
+db-run: ## Run database
+	docker-compose up -d db
+
+deps: deps-mix deps-node ## Setup dependencies
+
+deps-mix: ## Setup mix dependencies
+	mix deps.get --force
+
 deps-node: ## Setup node dependencies
 	cd assets && npm install
 
-db-run: ## Run database
-	docker-compose up -d db
