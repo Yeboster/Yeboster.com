@@ -1,3 +1,4 @@
+PGPASSWORD=$(shell if [ -z $${DB_PASS} ]; then echo 'changeme'; else echo $$DB_PASS; fi)
 all: help
 
 help: ## Show this help
@@ -14,8 +15,11 @@ deps-mix: ## Setup mix dependencies
 db-create: ## Create db
 	mix ecto.create
 
+db-shell: ## Opens a psql shell
+	docker-compose run --rm -e 'PGPASSWORD=$(PGPASSWORD)' db psql -h db -U yeboster
+
 deps-node: ## Setup node dependencies
 	cd assets && npm install
 
 db-run: ## Run database
-	docker-compose up -d
+	docker-compose up -d db
