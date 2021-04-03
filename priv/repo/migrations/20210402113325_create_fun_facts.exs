@@ -5,6 +5,7 @@ defmodule Yeboster.Repo.Migrations.CreateFunFacts do
     create table(:fun_facts) do
       add :message, :text
       add :source, :string
+      add :date, :utc_datetime
       add :tags, {:array, :string}
       add :category_id, references(:categories, on_delete: :nothing)
 
