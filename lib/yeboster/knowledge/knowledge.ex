@@ -3,9 +3,34 @@ defmodule Yeboster.Knowledge do
   Repository to interacts with multiple models
   """
 
+  import Ecto.Query, warn: false
+
   alias Yeboster.Repo
   alias Yeboster.Knowledge.FunFact
   alias Yeboster.Knowledge.Category
+
+  def get_random_fact do
+    fact =
+      FunFact
+      |> order_by(:show_count)
+      |> limit(1)
+      |> preload(:category)
+      |> Repo.one()
+
+    case fact do
+      %FunFact{} = fact ->
+        increase_fact_show_count(fact)
+        fact
+
+      nil ->
+        %FunFact{}
+    end
+  end
+
+  def increase_fact_show_count(%FunFact{} = fact) do
+    FunFact.increase_show_count(fact)
+    |> Repo.update()
+  end
 
   def get_category_by(attrs) do
     Repo.get_by(Category, attrs)

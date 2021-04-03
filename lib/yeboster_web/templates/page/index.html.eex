@@ -1,4 +1,6 @@
-<div>
-  <div class="mb-5 text-6xl uppercase">Yeboster</div>
-  <div class="text-xl">Born Zero Grown Hero</div>
+<div class="h-full flex flex-col justify-center">
+  <div>
+    <div class="mb-5 text-6xl uppercase">Yeboster</div>
+    <div class="text-xl">Born Zero Grown Hero</div>
+  </div>
 </div>

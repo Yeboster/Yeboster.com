@@ -1,6 +1,8 @@
 defmodule YebosterWeb.PageController do
   use YebosterWeb, :controller
 
+  alias Yeboster.Knowledge
+
   def index(conn, _params) do
     render(conn, "index.html")
   end
@@ -10,7 +12,8 @@ defmodule YebosterWeb.PageController do
   end
 
   def inspiration(conn, _params) do
-    render(conn, "inspiration.html")
+    fact = Knowledge.get_random_fact()
+    render(conn, "inspiration.html", fact: fact)
   end
 
   def contact(conn, _params) do
