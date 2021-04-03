@@ -8,6 +8,7 @@ defmodule Yeboster.Repo.Migrations.CreateFunFacts do
       add :date, :utc_datetime
       add :tags, {:array, :string}
       add :category_id, references(:categories, on_delete: :nothing)
+      add :show_count, :integer
 
       timestamps()
     end
