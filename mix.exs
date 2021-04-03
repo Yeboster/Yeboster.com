@@ -43,7 +43,7 @@ defmodule Yeboster.MixProject do
       {:telemetry_metrics, "~> 0.6.0"},
       {:telemetry_poller, "~> 0.5.1"},
       {:gettext, "~> 0.18.2"},
-      {:jason, "~> 1.2.2"},
+      {:jason, ">= 1.2.0"},
       {:plug_cowboy, "~> 2.4.1"},
       {:credo, "~> 1.5.5", only: [:dev, :test], runtime: false}
     ]
