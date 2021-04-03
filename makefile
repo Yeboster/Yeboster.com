@@ -1,4 +1,5 @@
 PGPASSWORD=$(shell if [ -z $${DB_PASS} ]; then echo 'changeme'; else echo $$DB_PASS; fi)
+
 all: help
 
 help: ## Show this help
@@ -25,5 +26,5 @@ deps-mix: ## Setup mix dependencies
 	mix deps.get --force
 
 deps-node: ## Setup node dependencies
-	cd assets && npm install
+	cd assets && yarn install
 
