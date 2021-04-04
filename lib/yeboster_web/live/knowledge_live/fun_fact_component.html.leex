@@ -4,13 +4,13 @@
 <div>
   <%= if Map.has_key?(@fun_fact, :message) do  %>
     <div class="mt-5 mx-auto text-center max-w-3xl">
-        <%= @fun_fact.message %>
+        "<%= @fun_fact.message %>"
     </div>
   <% else %>
     <div class="placeholder"></div>
   <% end %>
   <br/>
-  <%= if Map.has_key?(@fun_fact.category, :name) do %>
+  <%= if Map.has_key?(@fun_fact, :category) do %>
     <span class="p-1 rounded-lg border-2 border-gray">
         #<%= @fun_fact.category.name %>
     </span>

@@ -9,14 +9,14 @@ defmodule YebosterWeb.KnowledgeLive.FunFactComponent do
 
   @impl true
   def mount(socket) do
-    assigns =
+    fun_fact =
       if connected?(socket) do
-        assign(socket, fun_fact: random_fact())
+        random_fact()
       else
-        assign(socket, fun_fact: %Knowledge.FunFact{})
+        %{}
       end
 
-    {:ok, assigns}
+    {:ok, assign(socket, fun_fact: fun_fact)}
   end
 
   @impl true
