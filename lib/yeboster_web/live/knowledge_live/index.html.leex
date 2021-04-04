@@ -1,23 +1,21 @@
 <div>
-  <div class="mt-5 text-4xl uppercase gradient-text">Inspiration & Knowledge</div>
+  <h1 class="mt-5 text-4xl uppercase gradient-text">Inspiration & Knowledge</h1>
   <div class="mt-10">
     <div class="text-3xl uppercase">
       Fun Facts
     </div>
     <div>
       <div class="mt-5 mx-auto text-center max-w-3xl">
-        <%= @fact.message %>
+        <%= @fun_fact.message %>
       </div>
       <br/>
       <span class="p-1 rounded-lg border-2 border-gray">
-        #<%= @fact.category.name %>
+        #<%= @fun_fact.category.name %>
       </span>
     </div>
     <hr class="divider">
     <div>
-      <a class="p-1.5 gradient-background" href="/inspiration">Load Another</a>
-      <form action="inspiration.html_submit" method="get" accept-charset="utf-8">
-      </form>
+      <button phx-click="load_another_fact" class="p-1 gradient-background">Load another</button>
     </div>
   </div>
 </div>
