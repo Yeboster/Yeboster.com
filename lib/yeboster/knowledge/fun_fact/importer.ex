@@ -1,4 +1,7 @@
 defmodule Yeboster.Knowledge.FunFact.Importer do
+  @moduledoc """
+  A set of functions to import fun facts from @googlefactss telegram channel format
+  """
   alias Yeboster.Repo
   alias Yeboster.Knowledge
 
@@ -33,11 +36,11 @@ defmodule Yeboster.Knowledge.FunFact.Importer do
       case extract_data(map) do
         [tags: tags, map: updated] ->
           category_map =
-            unless Enum.empty?(tags) do
+            if Enum.empty?(tags) do
+              %{}
+            else
               List.first(tags)
               |> extract_category_id
-            else
-              %{}
             end
 
           updated
