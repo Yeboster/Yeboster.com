@@ -1,4 +1,4 @@
-defmodule YebosterWeb.KnowledgeLive.Index do
+defmodule YebosterWeb.KnowledgeLive do
   @moduledoc """
   Live view to show some knowledge as fun_facts
   """
@@ -19,15 +19,5 @@ defmodule YebosterWeb.KnowledgeLive.Index do
 
   defp apply_action(socket, :index, _params) do
     socket
-    |> assign(fun_fact: random_fact())
-  end
-
-  @impl true
-  def handle_event("load_another_fact", _value, socket) do
-    {:noreply, assign(socket, fun_fact: random_fact())}
-  end
-
-  defp random_fact do
-    Knowledge.get_random_fact()
   end
 end

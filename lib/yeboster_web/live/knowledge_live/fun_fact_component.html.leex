@@ -1,0 +1,24 @@
+<div class="text-3xl uppercase">
+  Fun Facts
+</div>
+<div>
+  <%= if Map.has_key?(@fun_fact, :message) do  %>
+    <div class="mt-5 mx-auto text-center max-w-3xl">
+        <%= @fun_fact.message %>
+    </div>
+  <% else %>
+    <div class="placeholder"></div>
+  <% end %>
+  <br/>
+  <%= if Map.has_key?(@fun_fact.category, :name) do %>
+    <span class="p-1 rounded-lg border-2 border-gray">
+        #<%= @fun_fact.category.name %>
+    </span>
+  <% else %>
+    <div class="placeholder"></div>
+  <% end %>
+</div>
+<hr class="divider">
+<div>
+  <button phx-click="load_another_fact" phx-target="<%= @myself %>"class="p-1 gradient-background">Load another</button>
+</div>

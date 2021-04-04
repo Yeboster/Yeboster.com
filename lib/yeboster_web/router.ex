@@ -21,7 +21,7 @@ defmodule YebosterWeb.Router do
 
     get "/", PageController, :index
     get "/about", PageController, :about
-    live "/knowledge", KnowledgeLive.Index, :index
+    live "/knowledge", KnowledgeLive, :index
     get "/contact", PageController, :contact
   end
 
