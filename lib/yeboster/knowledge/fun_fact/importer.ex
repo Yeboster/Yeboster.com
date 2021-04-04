@@ -47,7 +47,7 @@ defmodule Yeboster.Knowledge.FunFact.Importer do
           updated
       end
 
-    case Knowledge.create_fun_facts(updated_map) do
+    case Knowledge.create_fun_fact(updated_map) do
       {:error, changeset} ->
         errors_stringified =
           changeset.errors
