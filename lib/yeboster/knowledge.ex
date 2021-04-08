@@ -9,6 +9,8 @@ defmodule Yeboster.Knowledge do
   alias Yeboster.Knowledge.FunFact
   alias Yeboster.Knowledge.Category
 
+  alias Exmoji.EmojiChar
+
   @doc """
   Get a random fact and increase show_count
   """
@@ -31,9 +33,39 @@ defmodule Yeboster.Knowledge do
   end
 
   @doc """
+  Add a reaction emoji to a fun_fact
+  """
+  def add_reaction!(fact = %FunFact{}, emoji_name) when is_bitstring(emoji_name) do
+    case Exmoji.from_short_name(emoji_name) do
+      %EmojiChar{short_name: short_name} ->
+        fact
+        |> FunFact.add_reaction(short_name)
+        |> Repo.update!()
+
+      nil ->
+        fact
+    end
+  end
+
+  @doc """
+  Remove a reaction emoji to a fun_fact
+  """
+  def remove_reaction!(fact = %FunFact{}, emoji_name) when is_bitstring(emoji_name) do
+    case Exmoji.from_short_name(emoji_name) do
+      %EmojiChar{short_name: short_name} ->
+        fact
+        |> FunFact.remove_reaction(short_name)
+        |> Repo.update!()
+
+      nil ->
+        fact
+    end
+  end
+
+  @doc """
   Increase show_count on given fun_fact
   """
-  def increase_fact_show_count(%FunFact{} = fact) do
+  def increase_fact_show_count(fact = %FunFact{}) do
     FunFact.increase_show_count(fact)
     |> Repo.update()
   end
