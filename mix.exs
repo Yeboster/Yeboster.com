@@ -46,6 +46,7 @@ defmodule Yeboster.MixProject do
       {:gettext, "~> 0.18.2"},
       {:jason, ">= 1.2.0"},
       {:plug_cowboy, "~> 2.4.1"},
+      {:exmoji, "~> 0.2.2"},
       {:credo, "~> 1.5.5", only: [:dev, :test], runtime: false}
     ]
   end
