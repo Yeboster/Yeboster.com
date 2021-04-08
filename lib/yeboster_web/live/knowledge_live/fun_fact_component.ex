@@ -22,6 +22,7 @@ defmodule YebosterWeb.KnowledgeLive.FunFactComponent do
       |> assign(fun_fact: fun_fact)
       |> assign(selected_emoji: nil)
       |> assign(all_emojis: Exmoji.all())
+      |> assign(reset_emoji: nil)
 
     {:ok, socket}
   end
@@ -42,7 +43,12 @@ defmodule YebosterWeb.KnowledgeLive.FunFactComponent do
       socket.assigns.fun_fact
       |> Knowledge.add_reaction!(emoji)
 
-    {:noreply, assign(socket, fun_fact: fun_fact)}
+    socket =
+      socket
+      |> assign(fun_fact: fun_fact)
+      |> assign(reset_emoji: true)
+
+    {:noreply, socket}
   end
 
   @impl true

@@ -33,7 +33,7 @@ defmodule Yeboster.Knowledge.FunFact do
   end
 
   def add_reaction(fact = %FunFact{}, reaction) when is_bitstring(reaction) do
-    updated_reactions = [reaction] ++ fact.reactions
+    updated_reactions = fact.reactions ++ [reaction]
 
     fact
     |> change(%{reactions: updated_reactions})
