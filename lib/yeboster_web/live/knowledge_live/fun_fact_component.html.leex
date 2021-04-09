@@ -11,9 +11,17 @@
   <% end %>
   <br/>
   <%= if Map.has_key?(@fun_fact, :category) do %>
-    <span class="p-1 rounded-lg border-2 border-gray">
-        #<%= @fun_fact.category.name %>
-    </span>
+    <form id="category" phx-change="change_category" phx-target="<%= @myself %>">
+      <select class="p-1 rounded-lg border-2 border-gray" name="category">
+        <%= for category <- @categories do %>
+          <option value="<%= category.name %>"
+          <%= selected_attr(category.name, @fun_fact.category.name) %>
+          >
+            #<%= category.name %>
+          </option>
+        <% end %>
+      </select>
+    </form>
   <% else %>
     <div class="placeholder"></div>
   <% end %>
@@ -21,7 +29,7 @@
     <div class="mt-2">
       <h3 class="uppercase">Reactions</h3>
       <div class="flex justify-center">
-        <div id="reactions" phx-hook="remove_selected_emoji">
+        <div id="reactions" class="max-w-20" phx-hook="remove_selected_emoji">
           <%= for reaction <- @fun_fact.reactions do %>
             <span phx-click="remove_emoji" phx-value-emoji="<%= reaction %>" phx-target="<%= @myself %>" class="mr-1 cursor-pointer">
               <%= render_emoji reaction  %>
@@ -29,7 +37,7 @@
           <% end %>
         </div>
         <form id="add_emoji" phx-change="add_emoji" phx-target="<%= @myself %>">
-          <select name="emoji" id="emoji_select">
+          <select class="" name="emoji" id="emoji_select">
             <option value="" selected>Add</option>
             <%= for emoji <- @all_emojis do %>
               <option value="<%= emoji.short_name %>">

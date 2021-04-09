@@ -11,16 +11,27 @@ defmodule Yeboster.Knowledge do
 
   alias Exmoji.EmojiChar
 
+  # TODO: What is the best way to manage these queries ?
+  #       Create a module for each category ?
+  #       Or put composable queries into Schema?
+
+  @doc """
+  Composable query to get fact with category
+  """
+  def with_category(query, category = %Category{}) do
+    query
+    |> where([fact], fact.category_id == ^category.id)
+  end
+
   @doc """
   Get a random fact and increase show_count
   """
-  def get_random_fact do
+  def get_random_fact(query \\ FunFact) do
     fact =
-      FunFact
-      |> order_by(:show_count)
-      |> limit(1)
+      query
       |> preload(:category)
-      |> Repo.one()
+      |> order_by(:show_count)
+      |> get_first()
 
     case fact do
       %FunFact{} = fact ->
@@ -71,17 +82,18 @@ defmodule Yeboster.Knowledge do
   end
 
   @doc """
-  Get category by attributes
+  Get all categories
   """
-  def get_category_by(attrs) do
-    Repo.get_by(Category, attrs)
+  def get_all_categories() do
+    Category
+    |> Repo.all()
   end
 
   @doc """
   Find by or create category
   """
   def find_by_category_or_create(attrs) when is_map(attrs) do
-    case get_category_by(attrs) do
+    case Category |> Repo.get_by(attrs) do
       %Category{} = category ->
         {:ok, category}
 
@@ -106,5 +118,11 @@ defmodule Yeboster.Knowledge do
     %Category{}
     |> Category.changeset(attrs)
     |> Repo.insert()
+  end
+
+  def get_first(query) do
+    query
+    |> limit(1)
+    |> Repo.one()
   end
 end
