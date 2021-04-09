@@ -6,7 +6,6 @@ defmodule YebosterWeb.KnowledgeLive.FunFactComponent do
   use YebosterWeb, :live_component
 
   alias Yeboster.Repo
-  alias Yeboster.Knowledge
   alias Yeboster.Knowledge.{Category, FunFact}
   alias Exmoji.EmojiChar
 
@@ -14,7 +13,7 @@ defmodule YebosterWeb.KnowledgeLive.FunFactComponent do
   def mount(socket) do
     fun_fact =
       if connected?(socket) do
-        Knowledge.get_random_fact()
+        FunFact.Query.get_random_fact()
       else
         %{}
       end
@@ -23,7 +22,7 @@ defmodule YebosterWeb.KnowledgeLive.FunFactComponent do
       socket
       |> assign(fun_fact: fun_fact)
       |> assign(all_emojis: Exmoji.all())
-      |> assign(categories: Knowledge.get_all_categories())
+      |> assign(categories: Category.Query.all())
       |> assign(selected_category: nil)
 
     {:ok, socket}
@@ -34,10 +33,10 @@ defmodule YebosterWeb.KnowledgeLive.FunFactComponent do
     fact =
       case socket.assigns.selected_category do
         category = %Category{} ->
-          get_fact_with(category)
+          FunFact.Query.get_fact_with(category)
 
         nil ->
-          Knowledge.get_random_fact()
+          FunFact.Query.get_random_fact()
       end
 
     {:noreply, assign(socket, fun_fact: fact)}
@@ -51,13 +50,13 @@ defmodule YebosterWeb.KnowledgeLive.FunFactComponent do
       case socket.assigns.fun_fact do
         fun_fact = %FunFact{} ->
           if category.name != fun_fact.category.name do
-            get_fact_with(category)
+            FunFact.Query.get_fact_with(category)
           else
             fun_fact
           end
 
         _ ->
-          get_fact_with(category)
+          FunFact.Query.get_fact_with(category)
       end
 
     socket =
@@ -77,7 +76,7 @@ defmodule YebosterWeb.KnowledgeLive.FunFactComponent do
   def handle_event("add_emoji", %{"emoji" => emoji}, socket) do
     fun_fact =
       socket.assigns.fun_fact
-      |> Knowledge.add_reaction!(emoji)
+      |> FunFact.Query.add_reaction!(emoji)
 
     socket =
       socket
@@ -90,15 +89,9 @@ defmodule YebosterWeb.KnowledgeLive.FunFactComponent do
   def handle_event("remove_emoji", %{"emoji" => emoji}, socket) do
     fun_fact =
       socket.assigns.fun_fact
-      |> Knowledge.remove_reaction!(emoji)
+      |> FunFact.Query.remove_reaction!(emoji)
 
     {:noreply, assign(socket, fun_fact: fun_fact)}
-  end
-
-  defp get_fact_with(category = %Knowledge.Category{}) do
-    Knowledge.FunFact
-    |> Knowledge.with_category(category)
-    |> Knowledge.get_random_fact()
   end
 
   defp render_emoji(emoji = %EmojiChar{}), do: EmojiChar.render(emoji)

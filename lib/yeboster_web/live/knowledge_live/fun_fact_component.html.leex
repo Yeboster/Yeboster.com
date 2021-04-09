@@ -15,7 +15,7 @@
       <select class="p-1 rounded-lg border-2 border-gray" name="category">
         <%= for category <- @categories do %>
           <option value="<%= category.name %>"
-          <%= selected_attr(category.name, @fun_fact.category.name) %>
+            <%= selected_attr(category.name, @fun_fact.category.name) %>
           >
             #<%= category.name %>
           </option>
