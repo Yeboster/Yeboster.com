@@ -60,6 +60,7 @@ config :yeboster, YebosterWeb.Endpoint,
 # Watch static and templates for browser reloading.
 config :yeboster, YebosterWeb.Endpoint,
   live_reload: [
+    iframe_attrs: [class: "hidden"], # Hide iframe via tailwindcss class
     patterns: [
       ~r"priv/static/.*(js|css|png|jpeg|jpg|gif|svg)$",
       ~r"priv/gettext/.*(po)$",
