@@ -28,6 +28,20 @@ defmodule YebosterWeb.KnowledgeLive.FunFactComponent do
   end
 
   @impl true
+  def handle_event("change_id", %{"id" => id}, socket) do
+    fact =
+      with {int, _} <- Integer.parse(id),
+           fact = %FunFact{} <- FunFact.Query.get_id(int) do
+        fact
+        |> FunFact.Query.increase_fact_show_count!()
+      else
+        _ -> socket.assigns.fun_fact
+      end
+
+    {:noreply, assign(socket, fun_fact: fact)}
+  end
+
+  @impl true
   def handle_event("load_another_fact", _value, socket) do
     fact =
       case socket.assigns.selected_category do
@@ -100,4 +114,12 @@ defmodule YebosterWeb.KnowledgeLive.FunFactComponent do
   end
 
   defdelegate render_emoji(emoji), to: Emoji
+
+  defp fun_fact_alt_msg(%FunFact{date: date, source: source}) do
+    formatted = "#{date.day}/#{date.month}/#{date.year}"
+    "#{source} posted on #{formatted}"
+  end
+  defp fun_fact_alt_msg(any) do
+    ""
+  end
 end

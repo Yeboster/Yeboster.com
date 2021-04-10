@@ -33,7 +33,7 @@ liveSocket.connect()
 
 // Expose liveSocket on window for web console debug logs and latency simulation:
 // >> liveSocket.enableDebug()
-// >> liveSocket.enableLatencySim(1000)
+>> liveSocket.enableLatencySim(1000)
 // The latency simulator is enabled for the duration of the browser session.
 // Call disableLatencySim() to disable:
 // >> liveSocket.disableLatencySim()

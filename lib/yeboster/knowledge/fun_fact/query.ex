@@ -10,10 +10,21 @@ defmodule Yeboster.Knowledge.FunFact.Query do
 
   alias Exmoji.EmojiChar
 
+  def get_id(id) when is_integer(id) do
+    with_category()
+    |> where(id: ^id)
+    |> Repo.one()
+  end
+
+  def with_category(query \\ FunFact) do
+    query
+    |> preload(:category)
+  end
+
   @doc """
   Composable query to get fact with category
   """
-  def with_category(query \\ FunFact, category = %Category{}) do
+  def where_category(query \\ FunFact, category = %Category{}) do
     query
     |> where([fact], fact.category_id == ^category.id)
   end
@@ -24,14 +35,14 @@ defmodule Yeboster.Knowledge.FunFact.Query do
   def get_random_fact(query \\ FunFact) do
     fact =
       query
-      |> preload(:category)
+      |> with_category()
       |> order_by(:show_count)
       |> Repo.get_first()
 
     case fact do
       %FunFact{} = fact ->
-        increase_fact_show_count(fact)
         fact
+        |> increase_fact_show_count!()
 
       nil ->
         %FunFact{}
@@ -71,9 +82,9 @@ defmodule Yeboster.Knowledge.FunFact.Query do
   @doc """
   Increase show_count on given fun_fact
   """
-  def increase_fact_show_count(fact = %FunFact{}) do
+  def increase_fact_show_count!(fact = %FunFact{}) do
     FunFact.increase_show_count(fact)
-    |> Repo.update()
+    |> Repo.update!()
   end
 
   def create_fun_fact(attrs) when is_map(attrs) do
@@ -84,7 +95,7 @@ defmodule Yeboster.Knowledge.FunFact.Query do
 
   def get_fact_with(category = %Category{}) do
     FunFact
-    |> with_category(category)
+    |> where_category(category)
     |> get_random_fact()
   end
 end

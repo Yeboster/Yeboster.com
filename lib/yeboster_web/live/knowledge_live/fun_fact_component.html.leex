@@ -1,58 +1,68 @@
 <div class="text-3xl uppercase">
   Fun Facts
 </div>
-<div>
+<div class="flex flex-col items-center">
+  <%= if Map.has_key?(@fun_fact, :id) do %>
+    <div class="px-0.5 text-xs text-gray-400">
+      <form id="fact_id" phx-change="change_id" phx-target="<%= @myself %>">
+        <label for="id">nº</label>
+        <input class="w-8 text-center" type="text" name="id" value="<%= @fun_fact.id %>" id="id">
+      </form>
+    </div>
+  <% end %>
   <%= if Map.has_key?(@fun_fact, :message) do  %>
-    <div class="mt-5 mx-auto text-center max-w-3xl">
-        "<%= @fun_fact.message %>"
+    <div class="mt-5 mx-auto text-center max-w-3xl" alt="<%= fun_fact_alt_msg @fun_fact %>">
+        <%= @fun_fact.message %>
+    </div>
+    <div class="text-center mt-1 max-w-xl text-xs text-gray-400">
+      <%= fun_fact_alt_msg @fun_fact %>
     </div>
   <% else %>
     <div class="placeholder"></div>
   <% end %>
   <br/>
-  <%= if Map.has_key?(@fun_fact, :category) do %>
-    <form id="category" phx-change="change_category" phx-target="<%= @myself %>">
-      <select class="p-1 rounded-lg border-2 border-gray" name="category">
-        <%= for category <- @categories do %>
-          <option value="<%= category.name %>"
-            <%= selected_attr(category.name, @fun_fact.category.name) %>
-          >
-            #<%= category.name %>
-          </option>
-        <% end %>
-      </select>
-    </form>
-  <% else %>
-    <div class="placeholder"></div>
-  <% end %>
-  <%= if Map.has_key?(@fun_fact, :reactions) do %>
-    <div class="mt-2">
-      <h3 class="uppercase">Reactions</h3>
-      <div class="flex justify-center">
-        <div id="reactions" class="max-w-20" phx-hook="remove_selected_emoji">
-          <%= for reaction <- @fun_fact.reactions do %>
-            <span phx-click="remove_emoji" phx-value-emoji="<%= reaction %>" phx-target="<%= @myself %>" class="mr-1 cursor-pointer">
-              <%= render_emoji reaction  %>
-            </span>
+  <div class="flex flex-col md:flex-row justify-center md:max-w-20 text-sm">
+    <%= if Map.has_key?(@fun_fact, :category) and Map.has_key?(@fun_fact.category, :name) do %>
+      <form id="category" phx-change="change_category" phx-target="<%= @myself %>">
+        <select class="p-1 rounded-lg border-2 border-gray" name="category">
+          <%= for category <- @categories do %>
+            <option value="<%= category.name %>"
+              <%= selected_attr(category.name, @fun_fact.category.name) %>
+            >
+              #<%= category.name %>
+            </option>
           <% end %>
-        </div>
-        <form id="add_emoji" phx-change="add_emoji" phx-target="<%= @myself %>">
-          <select class="" name="emoji" id="emoji_select">
-            <option value="" selected>Add</option>
-            <%= for emoji <- @emojis do %>
-              <option value="<%= emoji.short_name %>">
-                <%= render_emoji emoji %>
-              </option>
+        </select>
+      </form>
+    <% else %>
+      <div class="placeholder"></div>
+    <% end %>
+    <%= if Map.has_key?(@fun_fact, :reactions) do %>
+      <div class="v-divider hidden md:inline-block"></div>
+      <div>
+        <div class="flex justify-center items-center">
+          <div id="reactions" phx-hook="remove_selected_emoji">
+            <%= for reaction <- @fun_fact.reactions do %>
+              <span phx-click="remove_emoji" phx-value-emoji="<%= reaction %>" phx-target="<%= @myself %>" class="mr-1 cursor-pointer">
+                <%= render_emoji reaction  %>
+              </span>
             <% end %>
-          </select>
-        </form>
+          </div>
+          <form id="add_emoji" phx-change="add_emoji" phx-target="<%= @myself %>">
+            <select class="" name="emoji" id="emoji_select">
+              <option value="" selected>Reaction</option>
+              <%= for emoji <- @emojis do %>
+                <option value="<%= emoji.short_name %>">
+                  <%= render_emoji emoji %>
+                </option>
+              <% end %>
+            </select>
+          </form>
+        </div>
       </div>
-    </div>
-  <% else %>
-    <div class="placeholder"></div>
-  <% end %>
+    <% end %>
+  </div>
 </div>
-<hr class="divider">
-<div>
-  <button phx-click="load_another_fact" phx-target="<%= @myself %>"class="p-1 gradient-background">Load another</button>
+<div class="mt-2">
+  <button class="btn" phx-click="load_another_fact" phx-target="<%= @myself %>">Load another</button>
 </div>
