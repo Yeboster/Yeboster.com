@@ -11,11 +11,11 @@
     </div>
   <% end %>
   <%= if Map.has_key?(@fun_fact, :message) do  %>
-    <div class="mt-5 mx-auto text-center max-w-3xl" alt="<%= fun_fact_alt_msg @fun_fact %>">
+    <div class="mt-5 mx-auto text-center max-w-3xl">
         <%= @fun_fact.message %>
     </div>
     <div class="text-center mt-1 max-w-xl text-xs text-gray-400">
-      <%= fun_fact_alt_msg @fun_fact %>
+      <%= fun_fact_meta_msg @fun_fact %>
     </div>
   <% else %>
     <div class="placeholder"></div>
