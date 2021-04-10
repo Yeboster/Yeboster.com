@@ -115,11 +115,10 @@ defmodule YebosterWeb.KnowledgeLive.FunFactComponent do
 
   defdelegate render_emoji(emoji), to: Emoji
 
-  defp fun_fact_alt_msg(%FunFact{date: date, source: source}) do
+  defp fun_fact_meta_msg(%FunFact{date: date, source: source}) do
     formatted = "#{date.day}/#{date.month}/#{date.year}"
     "#{source} posted on #{formatted}"
   end
-  defp fun_fact_alt_msg(any) do
-    ""
-  end
+
+  defp fun_fact_meta_msg(_any), do: ""
 end
