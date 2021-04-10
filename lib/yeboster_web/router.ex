@@ -1,12 +1,15 @@
 defmodule YebosterWeb.Router do
   use YebosterWeb, :router
 
+  import Phoenix.LiveView.Router
+
   pipeline :browser do
     plug :accepts, ["html"]
     plug :fetch_session
-    plug :fetch_flash
+    plug :fetch_live_flash
     plug :protect_from_forgery
     plug :put_secure_browser_headers
+    plug :put_root_layout, {YebosterWeb.LayoutView, :root}
   end
 
   pipeline :api do
@@ -18,7 +21,7 @@ defmodule YebosterWeb.Router do
 
     get "/", PageController, :index
     get "/about", PageController, :about
-    get "/inspiration", PageController, :inspiration
+    live "/knowledge", KnowledgeLive, :index
     get "/contact", PageController, :contact
   end
 

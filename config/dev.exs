@@ -20,6 +20,9 @@ config :yeboster, YebosterWeb.Endpoint,
   debug_errors: true,
   code_reloader: true,
   check_origin: false,
+  live_view: [
+    signing_salt: "0Qin4jSuUgFbr5op54+rExxJp/vt6QfxJ/CzJXdsWPBmctAhzMGh/yPVJx0qwvyV"
+  ],
   watchers: [
     node: [
       "node_modules/webpack/bin/webpack.js",
@@ -71,6 +74,10 @@ config :logger, :console, format: "[$level] $message\n"
 # Set a higher stacktrace during development. Avoid configuring such
 # in production as building large stacktraces may be expensive.
 config :phoenix, :stacktrace_depth, 20
+
+# Config Liveview templates
+config :phoenix,
+  template_engines: [leex: Phoenix.LiveView.Engine]
 
 # Initialize plugs at runtime for faster development compilation
 config :phoenix, :plug_init_mode, :runtime

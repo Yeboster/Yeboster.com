@@ -23,6 +23,7 @@ defmodule YebosterWeb do
 
       import Plug.Conn
       import YebosterWeb.Gettext
+      import Phoenix.LiveView.Controller
       alias YebosterWeb.Router.Helpers, as: Routes
     end
   end
@@ -31,7 +32,8 @@ defmodule YebosterWeb do
     quote do
       use Phoenix.View,
         root: "lib/yeboster_web/templates",
-        namespace: YebosterWeb
+        namespace: YebosterWeb,
+        layout: {YebosterWeb.LayoutView, "app.html"}
 
       # Import convenience functions from controllers
       import Phoenix.Controller,
@@ -42,12 +44,36 @@ defmodule YebosterWeb do
     end
   end
 
+  def live_view do
+    quote do
+      use Phoenix.LiveView,
+        layout: {YebosterWeb.LayoutView, "live.html"}
+
+      import Phoenix.LiveView.Helpers
+      import YebosterWeb.LiveHelpers
+
+      unquote(view_helpers())
+    end
+  end
+
+  def live_component do
+    quote do
+      use Phoenix.LiveComponent
+
+      import Phoenix.LiveView.Helpers
+      import YebosterWeb.LiveHelpers
+
+      unquote(view_helpers())
+    end
+  end
+
   def router do
     quote do
       use Phoenix.Router
 
       import Plug.Conn
       import Phoenix.Controller
+      import Phoenix.LiveView.Router
     end
   end
 
@@ -65,6 +91,10 @@ defmodule YebosterWeb do
 
       # Import basic rendering functionality (render, render_layout, etc)
       import Phoenix.View
+
+      # Live view helpers
+      import Phoenix.LiveView.Helpers
+      import YebosterWeb.LiveHelpers
 
       import YebosterWeb.ErrorHelpers
       import YebosterWeb.Gettext
