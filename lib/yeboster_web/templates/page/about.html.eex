@@ -1,8 +1,7 @@
 <div>
-  <h1 class="mt-5 text-4xl uppercase gradient-text">About me</h1>
-  
+  <h1 class="mt-5 text-4xl uppercase gradient-text">Let me introduce myself</h1>
   <div class="mt-10">
-    <div class="">Hello! My name is Marco, I am a 21 years old software developer based in Italy.</div>
+    <div>Hello! My name is Marco, I am a 21 years old software developer based in Italy.</div>
     <h4 class="mt-4 gradient-text uppercase">What I like</h4>
     <div>
       I am powered by curiosity and I love to learn everything. I am so fascinated by how the world works: how every concept, even if at first glance it seems superficial, but if studied deeply enough, it can open the door to a new world. Specifically, I am very intrigued by computer science, web development, lately AI and more.
@@ -15,5 +14,10 @@
       <br>
       In my free time I like to do a lot of things, but mainly I love to explore (nature, cities, books, new technologies, ...). I also like to work on my personal projects (you can find some at <a href="https://github.com/yeboster" target="_blank">my Github account</a> and <a href="https://gitlab.com/yeboster" target="_blank">my Gitlab account</a>).
     </div>
+  </div>
+  <div class="mt-10">
+    <h1 class="text-xl gradient-text uppercase">Project Roadmap</h1>
+    I will add here the list of projects I am working on, so if you would like to join the project or ask more information about them, then <a href="/contact">contact me!</a>
+    <div class="text-sm text-gray-500">Coming soon ...</div>
   </div>
 </div>

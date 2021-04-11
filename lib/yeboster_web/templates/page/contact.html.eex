@@ -1,3 +1,8 @@
 <div>
-  <div class="mb-5 text-3xl uppercase">Contact</div>
+  <div class="mt-5 text-4xl gradient-text uppercase">Let's Keep in touch</div>
+  <div class="mt-10">
+    Is there something you want to ask me, make a project together or just to say hello? Then I would love to hear form you!
+    <br>
+    You can send me an <a href="mailto:yeboster@gmail.com?subject=Let's keep in touch">email</a>
+  </div>
 </div>
