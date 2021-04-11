@@ -25,6 +25,10 @@
   .btn {
     @apply gradient-background p-1;
   }
+
+  a {
+    @apply gradient-text
+  }
 }
 
 /* Alerts and form errors */
