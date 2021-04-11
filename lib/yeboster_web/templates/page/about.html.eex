@@ -1,3 +1,19 @@
 <div>
-  <div class="mb-5 text-3xl uppercase">About</div>
+  <h1 class="mt-5 text-4xl uppercase gradient-text">About me</h1>
+  
+  <div class="mt-10">
+    <div class="">Hello! My name is Marco, I am a 21 years old software developer based in Italy.</div>
+    <h4 class="mt-4 gradient-text uppercase">What I like</h4>
+    <div>
+      I am powered by curiosity and I love to learn everything. I am so fascinated by how the world works: how every concept, even if at first glance it seems superficial, but if studied deeply enough, it can open the door to a new world. Specifically, I am very intrigued by computer science, web development, lately AI and more.
+    </div>
+    <h4 class="mt-4 gradient-text uppercase">What I do</h4>
+    <div>
+      Currently I am working at <a href="https://www.develondigital.com" target="_blank">Develon Digital</a>, a company that makes software solutions for a variety of customers. I am developing and maintaining Ruby On Rails projects (both monolithic and API), some Javascript/Typescript projects (Adonis 4/5, Typescript, Vue) and deploying applications via Kubernetes and Docker Compose.
+      <br>
+      I am also studying <a href="https://ai.units.it" target="_blank">AI at the University of Trieste</a> because I like mathematics and I want to enhance my software development knowledge with some AI.
+      <br>
+      In my free time I like to do a lot of things, but mainly I love to explore (nature, cities, books, new technologies, ...). I also like to work on my personal projects (you can find some at <a href="https://github.com/yeboster" target="_blank">my Github account</a> and <a href="https://gitlab.com/yeboster" target="_blank">my Gitlab account</a>).
+    </div>
+  </div>
 </div>
