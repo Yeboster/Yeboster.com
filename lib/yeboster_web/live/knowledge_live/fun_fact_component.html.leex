@@ -6,7 +6,7 @@
     <div class="px-0.5 text-xs text-gray-400">
       <form id="fact_id" phx-change="change_id" phx-target="<%= @myself %>">
         <label for="id">nº</label>
-        <input class="w-8 text-center" type="text" name="id" value="<%= @fun_fact.id %>" id="id">
+        <input class="w-8 text-center" type="text" name="id" value="<%= @fun_fact.id %>" phx-debounce="700">
       </form>
     </div>
   <% end %>
@@ -21,7 +21,7 @@
     <div class="placeholder"></div>
   <% end %>
   <br/>
-  <div class="flex flex-col md:flex-row justify-center md:max-w-20 text-sm">
+  <div class="flex flex-col md:flex-row justify-center items-center md:max-w-md text-sm">
     <%= if Map.has_key?(@fun_fact, :category) and Map.has_key?(@fun_fact.category, :name) do %>
       <form id="category" phx-change="change_category" phx-target="<%= @myself %>">
         <select class="p-1 rounded-lg border-2 border-gray" name="category">
@@ -39,7 +39,7 @@
     <% end %>
     <%= if Map.has_key?(@fun_fact, :reactions) do %>
       <div class="v-divider hidden md:inline-block"></div>
-      <div>
+      <div class="mt-2 md:mt-0">
         <div class="flex justify-center items-center">
           <div id="reactions" phx-hook="remove_selected_emoji">
             <%= for reaction <- @fun_fact.reactions do %>
@@ -49,7 +49,7 @@
             <% end %>
           </div>
           <form id="add_emoji" phx-change="add_emoji" phx-target="<%= @myself %>">
-            <select class="" name="emoji" id="emoji_select">
+            <select name="emoji" id="emoji_select">
               <option value="" selected>Reaction</option>
               <%= for emoji <- @emojis do %>
                 <option value="<%= emoji.short_name %>">
@@ -64,5 +64,5 @@
   </div>
 </div>
 <div class="mt-2">
-  <button class="btn" phx-click="load_another_fact" phx-target="<%= @myself %>">Load another</button>
+  <button class="btn" phx-click="load_another_fact" phx-disable-with="Loading..." phx-target="<%= @myself %>">Load another</button>
 </div>
