@@ -72,6 +72,7 @@ defmodule Yeboster.Knowledge.FunFact.Importer do
 
       normalized_message =
         message
+        |> String.replace("\n", "")
         |> String.replace(source, "")
         |> String.trim()
 

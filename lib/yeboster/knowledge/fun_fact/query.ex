@@ -65,6 +65,15 @@ defmodule Yeboster.Knowledge.FunFact.Query do
   end
 
   @doc """
+  Remove reaction at given index
+  """
+  def remove_reaction_at!(fact = %FunFact{}, index) when is_integer(index) do
+    fact
+    |> FunFact.remove_reaction_at(index)
+    |> Repo.update!()
+  end
+
+  @doc """
   Remove a reaction emoji to a fun_fact
   """
   def remove_reaction!(fact = %FunFact{}, emoji_name) when is_bitstring(emoji_name) do

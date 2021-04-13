@@ -99,10 +99,16 @@ defmodule YebosterWeb.KnowledgeLive.FunFactComponent do
   end
 
   @impl true
-  def handle_event("remove_emoji", %{"emoji" => emoji}, socket) do
+  def handle_event("remove_emoji", %{"emoji-index" => emoji_index}, socket) do
     fun_fact =
-      socket.assigns.fun_fact
-      |> FunFact.Query.remove_reaction!(emoji)
+      case Integer.parse(emoji_index) do
+        {index, _} ->
+          socket.assigns.fun_fact
+          |> FunFact.Query.remove_reaction_at!(index)
+
+        _ ->
+          socket.assigns.fun_fact
+      end
 
     {:noreply, assign(socket, fun_fact: fun_fact)}
   end
