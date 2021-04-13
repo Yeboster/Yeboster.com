@@ -3,7 +3,7 @@ defmodule Yeboster.Knowledge.FunFact.Importer do
   A set of functions to import fun facts from @googlefactss telegram channel format
   """
   alias Yeboster.Repo
-  alias Yeboster.Knowledge
+  alias Yeboster.Knowledge.{FunFact, Category}
 
   def import_google_facts(path \\ "./assets/json/google_facts.json")
 
@@ -50,7 +50,7 @@ defmodule Yeboster.Knowledge.FunFact.Importer do
           updated
       end
 
-    case Knowledge.create_fun_fact(updated_map) do
+    case FunFact.Query.create_fun_fact(updated_map) do
       {:error, changeset} ->
         errors_stringified =
           changeset.errors
@@ -72,6 +72,7 @@ defmodule Yeboster.Knowledge.FunFact.Importer do
 
       normalized_message =
         message
+        |> String.replace("\n", "")
         |> String.replace(source, "")
         |> String.trim()
 
@@ -98,7 +99,7 @@ defmodule Yeboster.Knowledge.FunFact.Importer do
   end
 
   defp extract_category_id(tag) when is_bitstring(tag) do
-    case Knowledge.find_by_category_or_create(%{name: tag}) do
+    case Category.Query.find_by_category_or_create(%{name: tag}) do
       {:ok, category} ->
         %{"category_id" => category.id}
 

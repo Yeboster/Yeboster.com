@@ -40,11 +40,19 @@ defmodule Yeboster.Knowledge.FunFact do
   end
 
   def remove_reaction(fact = %FunFact{}, reaction) when is_bitstring(reaction) do
-    updated_reactions =
-      fact.reactions
-      |> List.delete(reaction)
+    fact.reactions
+    |> List.delete(reaction)
+    |> change_reactions(fact)
+  end
 
+  def remove_reaction_at(fact = %FunFact{}, index) when is_integer(index) do
+    fact.reactions
+    |> List.delete_at(index)
+    |> change_reactions(fact)
+  end
+
+  defp change_reactions(reactions, fact = %FunFact{}) when is_list(reactions) do
     fact
-    |> change(%{reactions: updated_reactions})
+    |> change(%{reactions: reactions})
   end
 end
