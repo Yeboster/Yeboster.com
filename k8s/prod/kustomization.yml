@@ -4,5 +4,12 @@ kind: Kustomization
 bases:
   - "../bases/common"
 
+images:
+  - name: "app-image"
+    newName: "docker.pkg.github.com/yeboster/yeboster.me/app"
+  - name: "db-image"
+    newName: "postgres"
+    newTag: "12.4"
+
 resources:
   - "ingress.k8s.yml"
