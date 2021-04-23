@@ -5,7 +5,7 @@ defmodule Yeboster.Release do
 
   alias Yeboster.Setting.Query, as: Settings
   alias Yeboster.Knowledge.FunFact.Importer
-  use Phoenix.Endpoint
+
   @app :yeboster
 
   def seed_if_needed do
@@ -42,13 +42,12 @@ defmodule Yeboster.Release do
   end
 
   defp seed do
-    data_path =
-      case config(:app_data_path) do
-        data_path when is_bitstring(data_path) ->
-          Importer.import_google_facts("#{data_path}/google_facts.json")
+    case Application.fetch_env(@app, :app_data_path) do
+      {:ok, data_path} ->
+        Importer.import_google_facts("#{data_path}/google_facts.json")
 
-        _ ->
-          Importer.import_google_facts()
-      end
+      _ ->
+        Importer.import_google_facts()
+    end
   end
 end
