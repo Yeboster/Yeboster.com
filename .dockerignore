@@ -1,6 +1,7 @@
 _build/
 deps/
 .git/
+.node_modules/
 .gitignore
 Dockerfile
 makefile
