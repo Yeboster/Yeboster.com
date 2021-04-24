@@ -16,7 +16,7 @@ config :yeboster, YebosterWeb.Endpoint,
   secret_key_base: "S3OstmmARQwCpjs9ux+2dgP1OjarExCPOnPNCr3EVEZDB1VsnEpU/OINAMPl1xsT",
   render_errors: [view: YebosterWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: Yeboster.PubSub,
-  live_view: [signing_salt: "zC6RfMam"]
+  live_view: [signing_salt: "GkEjjr1x5mKFg+F5Qtg9Brmnajt7xSOJ"]
 
 # Configures Elixir's Logger
 config :logger, :console,
