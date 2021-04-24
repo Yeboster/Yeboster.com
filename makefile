@@ -1,4 +1,5 @@
 PGPASSWORD=$(shell if [ -z $${DB_PASS} ]; then echo 'changeme'; else echo $$DB_PASS; fi)
+IMAGE=ghcr.io/yeboster/yeboster.me
 
 all: help
 
@@ -28,3 +29,14 @@ deps-mix: ## Setup mix dependencies
 deps-node: ## Setup node dependencies
 	cd assets && yarn install
 
+build-image: ## Build docker image
+	docker build -t $(IMAGE) .
+
+publish-image: ## Publish docker image
+	docker push $(IMAGE)
+
+deploy-production: build-image publish-image ## Deploy app on k8s cluster
+	kubectl apply -k k8s/overlays/prod
+
+deploy-restart: ## Restart deployment
+	kubectl rollout restart deploy

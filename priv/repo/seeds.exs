@@ -9,3 +9,6 @@
 #
 # We recommend using the bang functions (`insert!`, `update!`
 # and so on) as they will fail if something goes wrong.
+
+# TODO: Add ! fn
+Yeboster.Knowledge.FunFact.Importer.import_google_facts()

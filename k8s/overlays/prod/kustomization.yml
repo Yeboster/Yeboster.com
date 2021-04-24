@@ -1,0 +1,31 @@
+apiVersion: kustomize.config.k8s.io/v1beta1
+kind: Kustomization
+
+bases:
+  - "../../bases/common"
+
+# Specify namespace for scoped configmaps
+namespace: yeboster
+
+configMapGenerator:
+  - name: app-env
+    envs:
+      - ./secrets/app.env
+  - name: database-env
+    envs:
+      - ./secrets/database.env
+
+images:
+  - name: "app-image"
+    newName: "ghcr.io/yeboster/yeboster.me"
+  - name: "db-image"
+    newName: "postgres"
+    newTag: "12.4"
+
+patchesStrategicMerge:
+  - "patch.app.deploy.k8s.yml"
+
+resources:
+  - "ingress.k8s.yml"
+  # NOTE: Used only for mix
+  # - "app-console.deploy.k8s.yml"

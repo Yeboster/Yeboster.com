@@ -1,0 +1,11 @@
+_build/
+deps/
+.git/
+.node_modules/
+.gitignore
+kubernetes/
+Dockerfile
+makefile
+README*
+test/
+priv/static/

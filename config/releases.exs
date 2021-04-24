@@ -10,8 +10,8 @@ database_url =
 config :yeboster, Yeboster.Repo,
   # ssl: true,
   url: database_url,
-  database: "yeboster_prod"
-  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10")
+  pool_size: String.to_integer(System.get_env("POOL_SIZE") || "10"),
+  server: true
 
 secret_key_base =
   System.get_env("SECRET_KEY_BASE") ||
@@ -42,6 +42,6 @@ config :yeboster, YebosterWeb.Endpoint,
   secret_key_base: secret_key_base,
   url: [
     host: "yeboster.me",
-    port: 443
+    port: 80
   ],
   app_data_path: app_data_path
