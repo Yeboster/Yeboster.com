@@ -14,7 +14,7 @@ spec:
     spec:
       containers:
       - name: app
-        image: deployment-image
+        image: app-image
         imagePullPolicy: Always
         envFrom:
           - configMapRef:
@@ -22,9 +22,13 @@ spec:
         resources:
           requests:
             cpu: 50m
-            memory: 50Mi
+            memory: 60Mi
         ports:
         - containerPort: 80
         volumeMounts:
           - mountPath: /app/data
             name: app-data
+      volumes:
+        - name: app-data
+          persistentVolumeClaim:
+              claimName: app-data

@@ -1,0 +1,28 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app-console
+  namespace: yeboster
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app-console
+  template:
+    metadata:
+      labels:
+        app: app-console
+    spec:
+      containers:
+        - name: app-console
+          image: ghcr.io/yeboster/yeboster.me:builder
+          command:
+            - /bin/sh
+            - -c
+            - "trap : TERM INT; sleep infinity & wait"
+          imagePullPolicy: Always
+          envFrom:
+            - configMapRef:
+                name: app-env
+      imagePullSecrets:
+      - name: regcred

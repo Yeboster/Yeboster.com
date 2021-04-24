@@ -5,7 +5,7 @@ metadata:
   labels:
     app: app
 spec:
-  storageClassName: local-storage
+  storageClassName: local-path
   accessModes:
     - ReadWriteOnce
   resources:

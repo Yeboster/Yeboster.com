@@ -6,7 +6,6 @@ metadata:
     app: app
 spec:
   ports:
-  - port: 80
-    targetPort: 4000
+  - port: 4000
   selector:
     app: app

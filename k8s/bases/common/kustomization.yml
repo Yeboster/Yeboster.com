@@ -4,8 +4,6 @@ kind: Kustomization
 namespace: yeboster
 
 images:
-  - name: "app-image"
-    newName: "yeboster.me"
   - name: "db-image"
     newName: "postgres"
     newTag: "12.4"
