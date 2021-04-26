@@ -5,26 +5,26 @@
   <%= if Map.has_key?(@fun_fact, :id) do %>
     <div class="px-0.5 text-xs text-gray-400">
       <form id="fact_id" phx-change="change_id" phx-target="<%= @myself %>">
-        <label for="id">nº</label>
-        <input class="w-8 text-center" type="text" name="id" value="<%= @fun_fact.id %>" phx-debounce="700">
+        <label for="fact_id">nº</label>
+        <input class="w-8 text-center" type="text" name="fact_id" value="<%= @fun_fact.id %>" phx-debounce="700">
       </form>
     </div>
   <% end %>
   <%= if Map.has_key?(@fun_fact, :message) do  %>
-    <div class="mt-5 mx-auto text-center">
+    <div class="mx-auto mt-5 text-center">
         <%= @fun_fact.message %>
     </div>
-    <div class="text-center mt-1 max-w-xl text-xs text-gray-400">
+    <div class="max-w-xl mt-1 text-xs text-center text-gray-400">
       <%= fun_fact_meta_msg @fun_fact %>
     </div>
   <% else %>
     <div class="placeholder"></div>
   <% end %>
   <br/>
-  <div class="flex flex-col md:flex-row justify-center items-center md:max-w-md text-sm">
+  <div class="flex flex-col items-center justify-center text-sm md:flex-row md:max-w-md">
     <%= if Map.has_key?(@fun_fact, :category) and Map.has_key?(@fun_fact.category, :name) do %>
       <form id="category" phx-change="change_category" phx-target="<%= @myself %>">
-        <select class="p-1 rounded-lg border-2 border-gray" name="category">
+        <select class="p-1 border-2 rounded-lg border-gray" name="category">
           <%= for category <- @categories do %>
             <option value="<%= category.name %>"
               <%= selected_attr(category.name, @fun_fact.category.name) %>
@@ -38,9 +38,9 @@
       <div class="placeholder"></div>
     <% end %>
     <%= if Map.has_key?(@fun_fact, :reactions) do %>
-      <div class="v-divider hidden md:inline-block"></div>
+      <div class="hidden v-divider md:inline-block"></div>
       <div class="mt-2 md:mt-0">
-        <div class="flex justify-center items-center">
+        <div class="flex items-center justify-center">
           <div id="reactions" phx-hook="remove_selected_emoji">
             <%= for {reaction, index} <- Enum.with_index(@fun_fact.reactions) do %>
               <span phx-click="remove_emoji" phx-value-emoji-index="<%= index %>" phx-target="<%= @myself %>" class="mr-1 cursor-pointer">

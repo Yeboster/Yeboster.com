@@ -14,6 +14,7 @@ defmodule Yeboster.Knowledge.FunFact.Query do
     with_category()
     |> where(id: ^id)
     |> Repo.one()
+    |> increase_show_count!
   end
 
   def with_category(query \\ FunFact) do
@@ -42,7 +43,7 @@ defmodule Yeboster.Knowledge.FunFact.Query do
     case fact do
       %FunFact{} = fact ->
         fact
-        |> increase_fact_show_count!()
+        |> increase_show_count!()
 
       nil ->
         %FunFact{}
@@ -91,7 +92,7 @@ defmodule Yeboster.Knowledge.FunFact.Query do
   @doc """
   Increase show_count on given fun_fact
   """
-  def increase_fact_show_count!(fact = %FunFact{}) do
+  def increase_show_count!(fact = %FunFact{}) do
     FunFact.increase_show_count(fact)
     |> Repo.update!()
   end
