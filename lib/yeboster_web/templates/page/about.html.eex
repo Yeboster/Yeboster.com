@@ -1,0 +1,39 @@
+<div>
+  <h1 class="mt-5 text-4xl uppercase gradient-background">Let me introduce myself</h1>
+  <div class="mt-10">
+    <div class="text-lg">Hello! My name is Marco, I am a <%= my_age() %> years old software developer based in Italy.</div>
+    <div class="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-6">
+      <div>
+        <div class="-mb-3">
+          <span class="card-header">What I like</span>
+        </div>
+        <div class="card-body">
+          I am powered by curiosity and I love to learn everything. I am so fascinated by how the world works: how every concept, even if at first glance it seems superficial, but if studied deeply enough, it can open the door to a new world. Specifically, I am very intrigued by computer science, web development, lately AI and more. I love meditating because it helps me to manage better this impulsive world we live in and I also like doing theatre, personally the best way to have fun and discover new emotions.
+        </div>
+      </div>
+      <div>
+        <div class="-mb-3">
+          <span class="card-header">What I do</span>
+        </div>
+        <div class="card-body">
+          I am a web developer at <a class="gradient-text" href="https://develondigital.com" target="_blank">Develon Digital</a> and I am developing and maintaining Ruby On Rails projects, some Javascript/Typescript projects and deploying via Kubernetes and Docker Compose. 
+          <br>
+          In 2020, I attended a cybersecurity course called <a class="gradient-text" href="https://cyberchallenge.it" target="_blank">CyberChallenge</a> which was a great opportunity to understand how cyber attacks are done on every side (from binary exploitation, crypto, web security, to hardware security).
+          <br>
+          I am also studying <a class="gradient-text" href="https://ai.units.it" target="_blank">AI at the University of Trieste</a> because I like mathematics and I want to enhance my software development knowledge with some AI.
+          <br>
+          In my free time I like to do a lot of things, but mainly I love to explore (nature, cities, books, new technologies, ...). I also like to work on my personal projects (you can find some at my <a class="gradient-text" href="https://github.com/yeboster" target="_blank">Github</a> and <a class="gradient-text" href="https://gitlab.com/yeboster" target="_blank">Gitlab</a> account).
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="mt-10">
+    <div class="-mb-3">
+    <span class="card-header">Project Roadmap</span>
+    </div>
+    <div class="card-body">
+      Below you can find a list of projects I am currently working on, are you interested in some of them ? <a class="gradient-text" href="/contact">Contact me!</a>
+      <iframe class="mt-5 clickup-embed" src="https://share.clickup.com/b/h/2j9wf-253/b561a736c050c86" onwheel="" width="100%" height="700px" style="background: transparent; border: 1px solid #ccc;"></iframe>
+    </div>
+  </div>
+</div>

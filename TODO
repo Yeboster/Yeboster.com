@@ -1,0 +1,16 @@
+Todo:
+  ✔ Add tailwind @started(20-08-29 18:50) @done(20-08-29 20:58) @lasted(2h8m17s)
+  ✔ Add homepage @started(20-08-29 18:50) @done(20-08-29 21:01) @lasted(2h11m40s)
+  ✔ Add Navbar on top of everything, to center content @done(20-08-30 18:15) Fixed with flex
+  ✔ Center main tag, somehow it has a right margin @done(20-08-30 18:16) Fixed with mx-auto
+  ☐ Improve routes inside navbar with Route module @started(20-08-30 18:16)
+  ☐ Add logo
+  ☐ About me page
+  ☐ Inspiration page
+    ☐ Inspiration quotes (personal selection)
+      ☐ Filter per category
+    ☐ Knowledge quotes
+      ☐ Telegram importer @started(20-09-03 20:44)
+        ☐ Serialize to struct
+      ☐ Personal quotes from books
+  ☐ Roadmap page

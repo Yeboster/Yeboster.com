@@ -1,0 +1,11 @@
+<div>
+  <h1 class="mt-5 text-4xl uppercase gradient-background">Inspiration & Knowledge</h1>
+  <div class="mt-10">
+    <div>
+      I love learning new things so I thought you would like to learn something too!
+    </div>
+    <div class="mt-5">
+      <%= live_component @socket, YebosterWeb.KnowledgeLive.FunFactComponent, id: "fun_fact", fact_id: @fact_id %>
+    </div>
+  </div>
+</div>

@@ -1,0 +1,33 @@
+apiVersion: apps/v1
+kind: Deployment
+metadata:
+  name: app
+spec:
+  replicas: 1
+  selector:
+    matchLabels:
+      app: app
+  template:
+    metadata:
+      labels:
+        app: app
+    spec:
+      containers:
+      - name: app
+        image: app-image
+        imagePullPolicy: Always
+        envFrom:
+          - configMapRef:
+              name: app-env
+        resources:
+          requests:
+            memory: 50Mi
+        ports:
+        - containerPort: 80
+        volumeMounts:
+          - mountPath: /app/data
+            name: app-data
+      volumes:
+        - name: app-data
+          persistentVolumeClaim:
+              claimName: app-data
