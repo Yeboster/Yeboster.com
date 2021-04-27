@@ -5,19 +5,32 @@ defmodule YebosterWeb.KnowledgeLive do
 
   use YebosterWeb, :live_view
 
-  alias Yeboster.Knowledge
-
   @impl true
   def mount(_params, _session, socket) do
-    {:ok, assign(socket, page_title: "Inspiration")}
+    socket =
+      socket
+      |> assign(fact_id: "", page_title: "Inspiration")
+
+    {:ok, socket}
   end
 
   @impl true
-  def handle_params(params, _url, socket) do
-    {:noreply, apply_action(socket, socket.assigns.live_action, params)}
+  def handle_params(%{"fact_id" => fact_id}, _url, socket) do
+    socket =
+      case Integer.parse(fact_id) do
+        {int, _} ->
+          socket
+          |> assign(fact_id: int)
+
+        _ ->
+          socket
+      end
+
+    {:noreply, socket}
   end
 
-  defp apply_action(socket, :index, _params) do
-    socket
+  @impl true
+  def handle_params(_params, _url, socket) do
+    {:noreply, socket}
   end
 end

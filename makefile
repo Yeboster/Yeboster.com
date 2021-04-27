@@ -40,3 +40,5 @@ deploy-production: build-image publish-image ## Deploy app on k8s cluster
 
 deploy-restart: ## Restart deployment
 	kubectl rollout restart deploy
+
+deploy-n-restart: deploy-production deploy-restart ## Deploy to k8s and restart reployment

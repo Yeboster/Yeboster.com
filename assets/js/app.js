@@ -18,6 +18,9 @@ import "phoenix_html"
 import {Socket} from "phoenix"
 import LiveSocket from "phoenix_live_view"
 
+import * as app_utils from './src/utils'
+window.app_utils = app_utils
+
 let Hooks = {}
 Hooks.remove_selected_emoji = {
   updated() {

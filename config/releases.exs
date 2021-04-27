@@ -20,13 +20,6 @@ secret_key_base =
     You can generate one by calling: mix phx.gen.secret
     """
 
-live_view_signing_salt =
-  System.fetch_env("LIVE_VIEW_SIGNING_SALT") ||
-    raise """
-    environment variable LIVE_VIEW_SIGNING_SALT is missing.
-    You can generate one by calling: mix phx.gen.secret
-    """
-
 app_data_path =
   System.fetch_env("APP_DATA") || "/app/data"
 
@@ -37,7 +30,7 @@ config :yeboster, YebosterWeb.Endpoint,
     transport_options: [socket_opts: [:inet6]]
   ],
   live_view: [
-    signing_salt: live_view_signing_salt
+    signing_salt: "WWsR57zOeo31u/Tr26kzAv7i/RZJu1jl"
   ],
   secret_key_base: secret_key_base,
   url: [

@@ -10,16 +10,8 @@ defmodule YebosterWeb.KnowledgeLive.FunFactComponent do
 
   @impl true
   def mount(socket) do
-    fun_fact =
-      if connected?(socket) do
-        FunFact.Query.get_random_fact()
-      else
-        %{}
-      end
-
     socket =
       socket
-      |> assign(fun_fact: fun_fact)
       |> assign(emojis: Emoji.selected())
       |> assign(categories: Category.Query.all())
       |> assign(selected_category: nil)
@@ -28,12 +20,41 @@ defmodule YebosterWeb.KnowledgeLive.FunFactComponent do
   end
 
   @impl true
-  def handle_event("change_id", %{"id" => id}, socket) do
+  def update(%{fact_id: fact_id}, socket) do
+    fun_fact =
+      if connected?(socket) do
+        case FunFact.Query.get_id(fact_id) do
+          %FunFact{} = fact ->
+            fact
+
+          _ ->
+            FunFact.Query.get_random_fact()
+        end
+      else
+        %{}
+      end
+
+    {:ok, assign(socket, fun_fact: fun_fact)}
+  end
+
+  @impl true
+  def update(_assigns, socket) do
+    fun_fact =
+      if connected?(socket) do
+        FunFact.Query.get_random_fact()
+      else
+        %{}
+      end
+
+    {:ok, assign(socket, fun_fact: fun_fact)}
+  end
+
+  @impl true
+  def handle_event("change_id", %{"fact_id" => id}, socket) do
     fact =
       with {int, _} <- Integer.parse(id),
            fact = %FunFact{} <- FunFact.Query.get_id(int) do
         fact
-        |> FunFact.Query.increase_fact_show_count!()
       else
         _ -> socket.assigns.fun_fact
       end
@@ -99,10 +120,16 @@ defmodule YebosterWeb.KnowledgeLive.FunFactComponent do
   end
 
   @impl true
-  def handle_event("remove_emoji", %{"emoji" => emoji}, socket) do
+  def handle_event("remove_emoji", %{"emoji-index" => emoji_index}, socket) do
     fun_fact =
-      socket.assigns.fun_fact
-      |> FunFact.Query.remove_reaction!(emoji)
+      case Integer.parse(emoji_index) do
+        {index, _} ->
+          socket.assigns.fun_fact
+          |> FunFact.Query.remove_reaction_at!(index)
+
+        _ ->
+          socket.assigns.fun_fact
+      end
 
     {:noreply, assign(socket, fun_fact: fun_fact)}
   end
@@ -115,11 +142,10 @@ defmodule YebosterWeb.KnowledgeLive.FunFactComponent do
 
   defdelegate render_emoji(emoji), to: Emoji
 
-  defp fun_fact_alt_msg(%FunFact{date: date, source: source}) do
+  defp fun_fact_meta_msg(%FunFact{date: date, source: source}) do
     formatted = "#{date.day}/#{date.month}/#{date.year}"
     "#{source} posted on #{formatted}"
   end
-  defp fun_fact_alt_msg(any) do
-    ""
-  end
+
+  defp fun_fact_meta_msg(_any), do: ""
 end

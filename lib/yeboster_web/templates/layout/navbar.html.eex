@@ -1,4 +1,4 @@
-<header class="flex flex-col items-center p-4 border-b-2">
+<header class="w-full flex flex-col items-center p-4 ring-1 ring-gray-900 ring-opacity-5 shadow-sm bg-white">
   <%# LOGO %>
   <nav class="flex flex-col md:inline-block text-center" role="navigation">
     <%= link "Home", to: Routes.page_path(@conn, :index), class: "mx-2 text-gray-600" %>
