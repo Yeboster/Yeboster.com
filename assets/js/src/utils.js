@@ -21,7 +21,6 @@ export function copyAndAlert(text) {
 function appendHiddenChildWith(text) {
   const input = document.createElement("input");
   input.setAttribute("type", "hidden");
-  input.setAttribute("id", "text_to_copy");
   input.setAttribute("value", text);
   document.body.appendChild(input);
 
