@@ -9,7 +9,7 @@ defmodule YebosterWeb.KnowledgeLive do
   def mount(_params, _session, socket) do
     socket =
       socket
-      |> assign(fact_id: "", page_title: "Inspiration")
+      |> assign(fact_id: nil, page_title: "Inspiration")
 
     {:ok, socket}
   end
