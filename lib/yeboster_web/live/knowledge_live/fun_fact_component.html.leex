@@ -41,7 +41,7 @@
       <div class="hidden v-divider md:inline-block"></div>
       <div class="mt-2 md:mt-0">
         <div class="flex items-center justify-center">
-          <div id="reactions" phx-hook="remove_selected_emoji">
+          <div class="mr-2" id="reactions" phx-hook="remove_selected_emoji">
             <%= for {reaction, index} <- Enum.with_index(@fun_fact.reactions) do %>
               <span phx-click="remove_emoji" phx-value-emoji-index="<%= index %>" phx-target="<%= @myself %>" class="mr-1 cursor-pointer">
                 <%= render_emoji reaction  %>
@@ -49,7 +49,7 @@
             <% end %>
           </div>
           <form id="add_emoji" phx-change="add_emoji" phx-target="<%= @myself %>">
-            <select name="emoji" id="emoji_select">
+            <select class="p-1 border-2 rounded-lg border-gray" name="emoji" id="emoji_select">
               <option value="" selected>Reaction</option>
               <%= for emoji <- @emojis do %>
                 <option value="<%= emoji.short_name %>">
@@ -63,6 +63,9 @@
     <% end %>
   </div>
 </div>
-<div class="mt-2">
-  <button class="btn" phx-click="load_another_fact" phx-disable-with="Loading..." phx-target="<%= @myself %>">Load another</button>
+<div class="flex flex-col items-center justify-center mt-2 md:flex-row">
+  <%= if Map.has_key?(@fun_fact, :id)  do %>
+    <button class="flex-none mb-2 btn md:mr-2 md:mb-0" onclick="window.app_utils.copyAndAlert('<%= Routes.knowledge_url(@socket, :index, fact_id: @fun_fact.id) %>')">Share</button>
+  <% end %>
+  <button class="flex-none btn" phx-click="load_another_fact" phx-disable-with="Loading..." phx-target="<%= @myself %>">Load another</button>
 </div>
