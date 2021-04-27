@@ -20,7 +20,7 @@ defmodule YebosterWeb.KnowledgeLive.FunFactComponent do
   end
 
   @impl true
-  def update(%{fact_id: fact_id}, socket) do
+  def update(%{fact_id: fact_id}, socket) when is_integer(fact_id) do
     fun_fact =
       if connected?(socket) do
         case FunFact.Query.get_id(fact_id) do
