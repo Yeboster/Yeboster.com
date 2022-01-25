@@ -1,16 +1,15 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
 
-namespace: yeboster
-
 images:
   - name: "db-image"
     newName: "postgres"
     newTag: "12.4"
 
 resources:
-  - "db.stateful.k8s.yml"
-  - "db.svc.k8s.yml"
-  - "app.deploy.k8s.yml"
-  - "app.svc.k8s.yml"
-  - "app.pvc.k8s.yml"
+  - namespace.k8s.yml
+  - db.stateful.k8s.yml
+  - db.svc.k8s.yml
+  - app.deploy.k8s.yml
+  - app.svc.k8s.yml
+  - app.pvc.k8s.yml
