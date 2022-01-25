@@ -9,6 +9,9 @@ RUN apk add --no-cache build-base git python3 yarn
 RUN mix local.hex --force && \
   mix local.rebar --force
 
+# node-sass wants python in path
+RUN ln -s /usr/bin/python3 /usr/bin/python
+
 COPY mix.exs mix.lock ./
 RUN mix do deps.get --only prod, deps.compile
 
