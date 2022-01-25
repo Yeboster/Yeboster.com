@@ -6,7 +6,6 @@ bases:
 
 # Specify namespace for scoped configmaps
 namespace: yeboster
-
 configMapGenerator:
   - name: app-env
     envs:
@@ -17,15 +16,17 @@ configMapGenerator:
 
 images:
   - name: "app-image"
-    newName: "ghcr.io/yeboster/yeboster.me"
-  - name: "db-image"
-    newName: "postgres"
-    newTag: "12.4"
+    newName: "registry.container-registry/yeboster/yeboster.me"
+  - name: "app-image-builder"
+    newName: "registry.container-registry/yeboster/yeboster.me"
+    newTag: "builder"
 
-patchesStrategicMerge:
-  - "patch.app.deploy.k8s.yml"
+# patchesStrategicMerge:
+#   - "patch.app.deploy.k8s.yml"
 
 resources:
   - "ingress.k8s.yml"
+  - "pipeline.k8s.yml"
+  - "pipeline-run.k8s.yml"
   # NOTE: Used only for mix
   # - "app-console.deploy.k8s.yml"

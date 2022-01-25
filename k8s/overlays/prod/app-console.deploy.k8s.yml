@@ -15,7 +15,7 @@ spec:
     spec:
       containers:
         - name: app-console
-          image: ghcr.io/yeboster/yeboster.me:builder
+          image: app-image-builder
           command:
             - /bin/sh
             - -c
@@ -24,5 +24,3 @@ spec:
           envFrom:
             - configMapRef:
                 name: app-env
-      imagePullSecrets:
-      - name: regcred

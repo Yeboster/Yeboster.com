@@ -1,0 +1,23 @@
+apiVersion: tekton.dev/v1beta1
+kind: PipelineRun
+metadata:
+  name: build-yeboster
+spec:
+  pipelineRef:
+    name: build-image
+  workspaces:
+  - name: shared-data
+    volumeClaimTemplate:
+      spec:
+        accessModes:
+        - ReadWriteOnce
+        resources:
+          requests:
+            storage: 1Gi
+  params:
+  - name: repo-url
+    value: https://github.com/Yeboster/Yeboster.me.git
+  - name: branch-name
+    value: master
+  - name: image
+    value: registry.container-registry/yeboster/yeboster.me
