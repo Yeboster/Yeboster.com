@@ -62,4 +62,9 @@ spec:
       value: $(params.context)
     - name: EXTRA_ARGS
       value: $(params.build-args)
+  - name: deploy-app
+    taskRef:
+      name: reconcile-webhook-trigger
+      kind: ClusterTask
+    
 
