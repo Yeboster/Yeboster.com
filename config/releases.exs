@@ -34,7 +34,7 @@ config :yeboster, YebosterWeb.Endpoint,
   ],
   secret_key_base: secret_key_base,
   url: [
-    host: "yeboster.me",
+    host: "yeboster.com",
     port: 80
   ],
   app_data_path: app_data_path
