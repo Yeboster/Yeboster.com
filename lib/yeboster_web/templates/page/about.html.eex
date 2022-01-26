@@ -1,7 +1,7 @@
 <div>
   <h1 class="mt-5 text-4xl uppercase gradient-background">Let me introduce myself</h1>
   <div class="mt-10">
-    <div class="text-lg">Hello! My name is Marco, I am a <%= my_age() %> years old software developer based in Italy.</div>
+    <div class="text-lg">Hello! My name is Marco, a.k.a Yeboster and I am <%= my_age() %> years old life lover and software developer based in Italy.</div>
     <div class="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-6">
       <div>
         <div class="-mb-3">
@@ -16,7 +16,7 @@
           <span class="card-header">What I do</span>
         </div>
         <div class="card-body">
-          I am a web developer at <a class="gradient-text" href="https://develondigital.com" target="_blank">Develon Digital</a> and I am developing and maintaining Ruby On Rails projects, some Javascript/Typescript projects and deploying via Kubernetes and Docker Compose. 
+          I am a web developer at <a class="gradient-text" href="https://develondigital.com" target="_blank">Develon Digital</a> and I am developing and maintaining Ruby On Rails projects, some Javascript/Typescript projects and deploying via Kubernetes and Docker Compose.
           <br>
           In 2020, I attended a cybersecurity course called <a class="gradient-text" href="https://cyberchallenge.it" target="_blank">CyberChallenge</a> which was a great opportunity to understand how cyber attacks are done on every side (from binary exploitation, crypto, web security, to hardware security).
           <br>
