@@ -16,9 +16,9 @@ configMapGenerator:
 
 images:
   - name: "app-image"
-    newName: "registry.container-registry/yeboster/yeboster.me"
+    newName: "registry.yeboster.com/yeboster/yeboster.me"
   - name: "app-image-builder"
-    newName: "registry.container-registry/yeboster/yeboster.me"
+    newName: "registry.yeboster.com/yeboster/yeboster.me"
     newTag: "builder"
 
 # patchesStrategicMerge:

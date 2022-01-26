@@ -3,14 +3,20 @@ kind: Ingress
 metadata:
   name: app-ingress
   annotations:
-    kubernetes.io/ingress.class: traefik
+    cert-manager.io/cluster-issuer: "letsencrypt-production"
+    traefik.ingress.kubernetes.io/router.entrypoints: "websecure"
 spec:
+  ingressClassName: "traefik"
+  tls:
+    - hosts:
+      - "yeboster.com"
+      secretName: yeboster-tls
   rules:
-    - host: yeboster.me
+    - host: yeboster.com
       http:
         paths:
           - path: /
-            pathType: Exact
+            pathType: Prefix
             backend:
               service:
                 name: app
