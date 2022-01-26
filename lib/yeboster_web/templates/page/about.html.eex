@@ -1,7 +1,7 @@
 <div>
   <h1 class="mt-5 text-4xl uppercase gradient-background">Let me introduce myself</h1>
   <div class="mt-10">
-    <div class="text-lg">Hello! My name is Marco, a.k.a Yeboster and I am a <%= my_age() %> years old life lover and software developer based in Italy.</div>
+    <div class="text-lg">Hello! My name is Marco, a.k.a Yeboster and I am a <%= my_age() %> years old life lover and I work as a full stack developer.</div>
     <div class="mt-10 grid grid-cols-1 lg:grid-cols-2 gap-6">
       <div>
         <div class="-mb-3">
