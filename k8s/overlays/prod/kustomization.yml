@@ -17,9 +17,10 @@ configMapGenerator:
 images:
   - name: "app-image"
     newName: "registry.yeboster.com/yeboster/yeboster.me"
-  - name: "app-image-builder"
-    newName: "registry.yeboster.com/yeboster/yeboster.me"
-    newTag: "builder"
+    newTag: "change-me" # {"$imagepolicy": "yeboster:image-policy:tag"}
+  # - name: "app-image-builder"
+  #   newName: "registry.yeboster.com/yeboster/yeboster.me"
+  #   newTag: "builder"
 
 # patchesStrategicMerge:
 #   - "patch.app.deploy.k8s.yml"
