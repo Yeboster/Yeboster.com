@@ -20,4 +20,4 @@ spec:
   - name: branch-name
     value: master
   - name: image
-    value: registry.yeboster.com/yeboster/yeboster.me
+    value: registry.yeboster.com/yeboster/yeboster.me:autobuild

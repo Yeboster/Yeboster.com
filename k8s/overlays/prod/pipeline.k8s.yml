@@ -6,65 +6,74 @@ spec:
   description: |
     Pull a git repository and build and push the docker image using the docker file.
   params:
-  - name: repo-url
-    type: string
-    description: The git repository URL to clone from.
-  - name: branch-name
-    type: string
-    description: The git branch to clone.
-  - name: image
-    type: string
-    description: Image name of the container
-  - name: dockerfile
-    type: string
-    description: Path to the Dockerfile
-    default: ./Dockerfile
-  - name: context
-    type: string
-    description: Path to the context (usually app root)
-    default: .
-  - name: build-args
-    type: string
-    description: Custom Kaniko build args
-    default: ""
+    - name: repo-url
+      type: string
+      description: The git repository URL to clone from.
+    - name: branch-name
+      type: string
+      description: The git branch to clone.
+    - name: image
+      type: string
+      description: Image name of the container
+    - name: dockerfile
+      type: string
+      description: Path to the Dockerfile
+      default: ./Dockerfile
+    - name: context
+      type: string
+      description: Path to the context (usually app root)
+      default: .
+    - name: build-args
+      type: string
+      description: Custom Kaniko build args
+      default: ""
   workspaces:
-  - name: shared-data
-    description: |
-      This workspace will receive the cloned git repo and be passed
-      to the image builder
+    - name: shared-data
+      description: |
+        This workspace will receive the cloned git repo and be passed
+        to the image builder
   tasks:
-  - name: fetch-repo
-    taskRef:
-      name: git-clone
-      kind: ClusterTask
-    workspaces:
-    - name: output
-      workspace: shared-data
-    params:
-    - name: url
-      value: $(params.repo-url)
-    - name: revision
-      value: $(params.branch-name)
-  - name: build-image
-    taskRef:
-      name: build-image
-      kind: ClusterTask
-    runAfter: ["fetch-repo"]
-    workspaces:
-    - name: source
-      workspace: shared-data
-    params:
-    - name: IMAGE
-      value: $(params.image)
-    - name: DOCKERFILE
-      value: $(params.dockerfile)
-    - name: CONTEXT
-      value: $(params.context)
-    - name: EXTRA_ARGS
-      value: $(params.build-args)
-  - name: deploy-app
-    taskRef:
-      name: reconcile-webhook-trigger
-      kind: ClusterTask
-    
-
+    - name: fetch-repo
+      taskRef:
+        name: git-clone
+        kind: ClusterTask
+      workspaces:
+        - name: output
+          workspace: shared-data
+      params:
+        - name: url
+          value: $(params.repo-url)
+        - name: revision
+          value: $(params.branch-name)
+    - name: generate-build-id
+      taskRef:
+        name: generate-build-id
+        kind: ClusterTask
+      params:
+        - name: base-version
+          value: $(params.image)
+    - name: build-image
+      taskRef:
+        name: build-image
+        kind: ClusterTask
+      runAfter:
+        - fetch-repo
+        - generate-build-id
+      workspaces:
+        - name: source
+          workspace: shared-data
+      params:
+        - name: IMAGE
+          value: $(tasks.generate-build-id.results.build-id)
+        - name: DOCKERFILE
+          value: $(params.dockerfile)
+        - name: CONTEXT
+          value: $(params.context)
+        - name: EXTRA_ARGS
+          value: $(params.build-args)
+    - name: deploy-app
+      taskRef:
+        name: reconcile-webhook-trigger
+        kind: ClusterTask
+      runAfter:
+        - build-image
