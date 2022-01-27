@@ -1,9 +1,7 @@
 apiVersion: kustomize.config.k8s.io/v1beta1
 kind: Kustomization
-
 bases:
   - "../../bases/common"
-
 # Specify namespace for scoped configmaps
 namespace: yeboster
 configMapGenerator:
@@ -13,18 +11,16 @@ configMapGenerator:
   - name: database-env
     envs:
       - ./secrets/database.env
-
 images:
   - name: "app-image"
     newName: "registry.yeboster.com/yeboster/yeboster.me"
-    newTag: "change-me" # {"$imagepolicy": "yeboster:image-policy:tag"}
-  # - name: "app-image-builder"
-  #   newName: "registry.yeboster.com/yeboster/yeboster.me"
-  #   newTag: "builder"
+    newTag: "autobuild-20220127-120439" # {"$imagepolicy": "yeboster:image-policy:tag"}
+# - name: "app-image-builder"
+#   newName: "registry.yeboster.com/yeboster/yeboster.me"
+#   newTag: "builder"
 
 # patchesStrategicMerge:
 #   - "patch.app.deploy.k8s.yml"
-
 resources:
   - "ingress.k8s.yml"
   - "pipeline.k8s.yml"
