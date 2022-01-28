@@ -7,9 +7,8 @@ images:
     newTag: "12.4"
 
 resources:
-  - namespace.k8s.yml
-  - db.stateful.k8s.yml
-  - db.svc.k8s.yml
-  - app.deploy.k8s.yml
-  - app.svc.k8s.yml
-  - app.pvc.k8s.yml
+  - namespace.k8s.yaml
+  - db.stateful.k8s.yaml
+  - db.svc.k8s.yaml
+  - app.deploy.k8s.yaml
+  - app.svc.k8s.yaml

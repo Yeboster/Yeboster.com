@@ -8,8 +8,8 @@ images:
     newName: registry.yeboster.com/yeboster/yeboster.me
     newTag: autobuild-20220128-164030 # {"$imagepolicy": "yeboster:image-policy:tag"}
 resources:
-  - ingress.k8s.yml
-  - pipeline.k8s.yml
-  - pipeline-run.k8s.yml
-  - secrets/app.sops.yml
-  - secrets/database.sops.yml
+  - ingress.k8s.yaml
+  - pipeline.k8s.yaml
+  - pipeline-run.k8s.yaml
+  - secrets/app.sops.yaml
+  - secrets/database.sops.yaml
