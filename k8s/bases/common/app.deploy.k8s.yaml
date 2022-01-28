@@ -34,9 +34,7 @@ spec:
       volumes:
         - name: app-data
           ephemeral:
-            volumeClaimTemplates:
-              metadata:
-                name: app-data
+            volumeClaimTemplate:
               spec:
                 accessModes: ["ReadWriteOnce"]
                 storageClassName: local-path
