@@ -35,11 +35,11 @@ spec:
         - name: app-data
           ephemeral:
             volumeClaimTemplates:
-              - metadata:
-                  name: app-data
-                spec:
-                  accessModes: ["ReadWriteOnce"]
-                  storageClassName: local-path
-                  resources:
-                    requests:
-                      storage: 500Mi
+              metadata:
+                name: app-data
+              spec:
+                accessModes: ["ReadWriteOnce"]
+                storageClassName: local-path
+                resources:
+                  requests:
+                    storage: 500Mi
