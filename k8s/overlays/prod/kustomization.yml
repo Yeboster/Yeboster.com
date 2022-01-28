@@ -14,7 +14,7 @@ configMapGenerator:
 images:
   - name: "app-image"
     newName: "registry.yeboster.com/yeboster/yeboster.me"
-    newTag: "autobuild-20220127-120439" # {"$imagepolicy": "yeboster:image-policy:tag"}
+    newTag: "autobuild-20220128-164030" # {"$imagepolicy": "yeboster:image-policy:tag"}
 # - name: "app-image-builder"
 #   newName: "registry.yeboster.com/yeboster/yeboster.me"
 #   newTag: "builder"
