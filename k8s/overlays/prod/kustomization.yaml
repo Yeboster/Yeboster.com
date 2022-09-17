@@ -5,11 +5,9 @@ bases:
   - ../../bases/common
 images:
   - name: app-image
-    newName: registry.yeboster.com/yeboster/yeboster.me
-    newTag: autobuild-20220128-164030 # {"$imagepolicy": "yeboster:image-policy:tag"}
+    newName: yeboster/yeboster.com
+    newTag: autobuild-20220128-164030
 resources:
   - ingress.k8s.yaml
-  - pipeline.k8s.yaml
-  - pipeline-run.k8s.yaml
   - secrets/app.sops.yaml
   - secrets/database.sops.yaml
