@@ -70,10 +70,12 @@ jobs:
     name: Deploy
     runs-on: ubuntu-latest
     steps:
+      - name: Check out the repo
+        uses: actions/checkout@v2
+
       - name: Update image tag version
-        uses: grebois/kube-tools@v1.5.2
+        uses: mikefarah/yq@v4.27.5
         with:
-          yq: 4.19.1
           command: |
             echo "Update image tag version to ${{ steps.version.outputs.version }}"
             yq -i '.images[0].newTag = "${{ steps.version.outputs.version }}"' k8s/overlays/prod/kustomization.yaml
