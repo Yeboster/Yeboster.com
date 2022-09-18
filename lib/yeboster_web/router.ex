@@ -7,10 +7,9 @@ defmodule YebosterWeb.Router do
     plug :accepts, ["html"]
     plug :fetch_session
     plug :fetch_live_flash
-    plug :protect_from_forgery
-    # TODO: Enforce CSP
-    plug :put_secure_browser_headers, %{"Content-Security-Policy" => ""}
     plug :put_root_layout, {YebosterWeb.LayoutView, :root}
+    plug :protect_from_forgery
+    plug :put_secure_browser_headers
   end
 
   pipeline :api do

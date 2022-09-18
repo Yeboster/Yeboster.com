@@ -1,11 +1,11 @@
 # Builder
-FROM elixir:1.11.4-alpine AS builder
+FROM elixir:1.13.4-alpine AS builder
 
 WORKDIR /app
 
 ENV MIX_ENV=prod
 
-RUN apk add --no-cache build-base git python2 yarn
+RUN apk add --no-cache build-base git npm
 RUN mix local.hex --force && \
   mix local.rebar --force
 
@@ -18,11 +18,10 @@ COPY lib lib
 COPY priv priv
 COPY assets assets
 
-RUN yarn --cwd ./assets install --frozen-lockfile && \
-      yarn --cwd ./assets run deploy && \
-      mix phx.digest
+RUN npm --cwd ./assets install --frozen-lockfile && \
+      mix assets.deploy
 
-RUN mix do compile, release
+RUN mix release
 
 # Prod
 FROM alpine AS prod
