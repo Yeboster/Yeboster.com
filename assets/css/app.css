@@ -2,6 +2,5 @@
 @import "tailwindcss/components";
 @import "tailwindcss/utilities";
 
-@import "./utils/components.scss";
-@import "./utils/alerts.scss";
-
+@import "./utils/components.css";
+@import "./utils/alerts.css";
