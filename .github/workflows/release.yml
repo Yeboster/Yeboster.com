@@ -79,10 +79,9 @@ jobs:
 
       - name: Update image tag version
         uses: mikefarah/yq@v4.27.5
-        with:
-          command: |
-            echo "Update image tag version to ${{ needs.build_and_push.outputs.version }}"
-            yq -i '.images[0].newTag = "${{ needs.build_and_push.outputs.version }}"' k8s/overlays/prod/kustomization.yaml
+        run: |
+          echo "Update image tag version to ${{ needs.build_and_push.outputs.version }}"
+          yq -i '.images[0].newTag = "${{ needs.build_and_push.outputs.version }}"' k8s/overlays/prod/kustomization.yaml
 
       - name: Update version
         run: |
