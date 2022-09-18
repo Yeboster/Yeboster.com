@@ -140,6 +140,10 @@ defmodule YebosterWeb.KnowledgeLive.FunFactComponent do
     end
   end
 
+  defp copy_fact_url_to_clipboard(socket, fact_id) do
+    "window.app_utils.copyAndAlert('" <> Routes.knowledge_url(socket, :index, fact_id: fact_id) <> "')"
+  end
+
   defdelegate render_emoji(emoji), to: Emoji
 
   defp fun_fact_meta_msg(%FunFact{date: date, source: source}) do
