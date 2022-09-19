@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.0
+- Bump project deps (Phoenix to 1.6.12)
+- General refactor
+
 ## 0.8.1
 - Move from Tekton pipelines to Github actions
 

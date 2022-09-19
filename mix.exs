@@ -5,7 +5,7 @@ defmodule Yeboster.MixProject do
     [
       app: :yeboster,
       version: "0.1.0",
-      elixir: "~> 1.11.4",
+      elixir: "~> 1.13.4",
       elixirc_paths: elixirc_paths(Mix.env()),
       compilers: [:phoenix, :gettext] ++ Mix.compilers(),
       start_permanent: Mix.env() == :prod,
@@ -33,20 +33,22 @@ defmodule Yeboster.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.5.8"},
-      {:phoenix_ecto, "~> 4.2.1"},
-      {:ecto_sql, "~> 3.5.4"},
-      {:postgrex, "~> 0.15.8"},
-      {:phoenix_html, "~> 2.14.3"},
+      {:phoenix, "~> 1.6.12"},
+      {:phoenix_ecto, "~> 4.4"},
+      {:ecto_sql, "~> 3.6"},
+      {:postgrex, ">= 0.0.0"},
+      {:phoenix_html, "~> 3.0"},
       {:phoenix_live_reload, "~> 1.3.0", only: :dev},
-      {:phoenix_live_dashboard, "~> 0.4.0"},
-      {:phoenix_live_view, "~> 0.15.4"},
+      {:phoenix_live_dashboard, "~> 0.6"},
+      {:phoenix_live_view, "~> 0.17.11"},
       {:telemetry_metrics, "~> 0.6.0"},
-      {:telemetry_poller, "~> 0.5.1"},
-      {:gettext, "~> 0.18.2"},
+      {:telemetry_poller, "~> 1.0"},
+      {:gettext, "~> 0.18"},
       {:jason, ">= 1.2.0"},
-      {:plug_cowboy, "~> 2.4.1"},
+      {:plug_cowboy, "~> 2.5"},
       {:exmoji, "~> 0.2.2"},
+      {:esbuild, "~> 0.4", runtime: Mix.env() == :dev},
+      {:floki, ">= 0.30.0", only: :test},
       {:credo, "~> 1.5.5", only: [:dev, :test], runtime: false}
     ]
   end
@@ -59,10 +61,11 @@ defmodule Yeboster.MixProject do
   # See the documentation for `Mix` for more info on aliases.
   defp aliases do
     [
-      setup: ["deps.get", "ecto.setup", "cmd npm install --prefix assets"],
+      setup: ["deps.get", "ecto.setup"],
       "ecto.setup": ["ecto.create", "ecto.migrate", "run priv/repo/seeds.exs"],
       "ecto.reset": ["ecto.drop", "ecto.setup"],
-      test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"]
+      test: ["ecto.create --quiet", "ecto.migrate --quiet", "test"],
+      "assets.deploy": ["cmd --cd assets npm run deploy", "esbuild default --minify", "phx.digest"]
     ]
   end
 end

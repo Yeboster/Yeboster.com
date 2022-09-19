@@ -5,7 +5,7 @@
 # is restricted to this project.
 
 # General application configuration
-use Mix.Config
+import Config
 
 config :yeboster,
   ecto_repos: [Yeboster.Repo]
@@ -17,6 +17,16 @@ config :yeboster, YebosterWeb.Endpoint,
   render_errors: [view: YebosterWeb.ErrorView, accepts: ~w(html json), layout: false],
   pubsub_server: Yeboster.PubSub,
   live_view: [signing_salt: "GkEjjr1x5mKFg+F5Qtg9Brmnajt7xSOJ"]
+
+# Configure esbuild (the version is required)
+config :esbuild,
+  version: "0.14.41",
+  default: [
+    args:
+      ~w(js/app.js --bundle --target=es2017 --outdir=../priv/static/assets --external:/fonts/* --external:/images/*),
+    cd: Path.expand("../assets", __DIR__),
+    env: %{"NODE_PATH" => Path.expand("../deps", __DIR__)}
+  ]
 
 # Configures Elixir's Logger
 config :logger, :console,
