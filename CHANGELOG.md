@@ -3,6 +3,7 @@
 ## 1.0.1
 - Fix release CI
 - Remove some deprecations
+- Update about & contact page
 
 ## 1.0.0
 - Bump project deps (Phoenix to 1.6.12)
