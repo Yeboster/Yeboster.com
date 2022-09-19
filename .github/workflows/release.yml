@@ -9,9 +9,11 @@ jobs:
   build_and_push:
     name: Build and push
     runs-on: ubuntu-latest
+    outputs:
+      version: ${{ steps.version.outputs.version }}
     steps:
       - name: Check out the repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
 
       - name: Set up QEMU
         uses: docker/setup-qemu-action@v1.2.0
@@ -71,26 +73,28 @@ jobs:
     runs-on: ubuntu-latest
     steps:
       - name: Check out the repo
-        uses: actions/checkout@v2
+        uses: actions/checkout@v3
+        with:
+          ref: 'main'
 
       - name: Update image tag version
         uses: mikefarah/yq@v4.27.5
         with:
           command: |
-            echo "Update image tag version to ${{ steps.version.outputs.version }}"
-            yq -i '.images[0].newTag = "${{ steps.version.outputs.version }}"' k8s/overlays/prod/kustomization.yaml
+            echo "Update image tag version to ${{ needs.build_and_push.outputs.version }}"
+            yq -i '.images[0].newTag = "${{ needs.build_and_push.outputs.version }}"' k8s/overlays/prod/kustomization.yaml
 
       - name: Update version
         run: |
-          echo "Update version to ${{ steps.version.outputs.version }}"
-          echo "${{ steps.version.outputs.version }}" > VERSION
+          echo "Update version to ${{ needs.build_and_push.outputs.version }}"
+          echo "${{ needs.build_and_push.outputs.version }}" > VERSION
 
       - name: Commit latest release version
         run: |
           git config --global user.name 'yeboster'
           git config --global user.email 'bot@yeboster.com'
           git add .
-          git commit -m "Update version to ${{ steps.version.outputs.version }}"
+          git commit -m "Update version to ${{ needs.build_and_push.outputs.version }}"
           git push
 
       - name: Trigger deploy
