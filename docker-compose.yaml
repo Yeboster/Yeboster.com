@@ -1,6 +1,16 @@
 version: "3.4"
 
 services:
+  web:
+    build: .
+    environment:
+      PHX_HOST: localhost
+      DATABASE_URL: ecto://yeboster:changeme@db/yeboster_dev
+      SECRET_KEY_BASE: KxzmfhrkgbYH2Zsssx2vi60KHAIfHdTxXf9vxmY7aaHFU+YnvgDF/WFBKn8srk8G
+      LIVE_VIEW_SIGNING_SALT: FxXoLtLNW7SclwCi
+      APP_DATA_PATH: /app/data
+    ports:
+      - 4000:4000
   db:
     image: postgres:12.4
     restart: on-failure

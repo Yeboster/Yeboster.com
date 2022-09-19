@@ -1,4 +1,4 @@
-use Mix.Config
+import Config
 
 # Configure your database
 config :yeboster, Yeboster.Repo,
@@ -16,19 +16,22 @@ config :yeboster, Yeboster.Repo,
 # watchers to your application. For example, we use it
 # with webpack to recompile .js and .css sources.
 config :yeboster, YebosterWeb.Endpoint,
-  http: [port: 4000],
-  debug_errors: true,
+  http: [ip: {127, 0, 0, 1}, port: 4000],
   code_reloader: true,
   check_origin: false,
+  debug_errors: true,
   live_view: [
     signing_salt: "0Qin4jSuUgFbr5op54+rExxJp/vt6QfxJ/CzJXdsWPBmctAhzMGh/yPVJx0qwvyV"
   ],
   watchers: [
-    node: [
-      "node_modules/webpack/bin/webpack.js",
-      "--mode",
-      "development",
-      "--watch-stdin",
+    # Start the esbuild watcher by calling Esbuild.install_and_run(:default, args)
+    esbuild: {Esbuild, :install_and_run, [:default, ~w(--sourcemap=inline --watch)]},
+    npx: [
+      "tailwindcss",
+      "--input=css/app.css",
+      "--output=../priv/static/assets/app.css",
+      "--postcss",
+      "--watch",
       cd: Path.expand("../assets", __DIR__)
     ]
   ]
