@@ -64,7 +64,7 @@
   </div>
   <div class="flex flex-col items-center justify-center mt-2 md:flex-row">
     <%= if Map.has_key?(@fun_fact, :id)  do %>
-      <button class="flex-none mb-2 btn md:mr-2 md:mb-0" onclick="window.app_utils.copyAndAlert('{Routes.knowledge_url(@socket, :index, fact_id: @fun_fact.id)}')">Share</button>
+      <button class="flex-none mb-2 btn md:mr-2 md:mb-0" onclick={copy_fact_url_to_clipboard(@socket, @fun_fact.id)}>Share</button>
     <% end %>
     <button class="flex-none btn" phx-click="load_another_fact" phx-disable-with="Loading..." phx-target={@myself}>Load another</button>
   </div>
