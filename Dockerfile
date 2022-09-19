@@ -5,7 +5,7 @@ WORKDIR /app
 
 ENV MIX_ENV=prod
 
-RUN apk add --no-cache build-base git npm
+RUN apk add --no-cache build-base git yarn
 RUN mix local.hex --force && \
   mix local.rebar --force
 
@@ -18,7 +18,7 @@ COPY lib lib
 COPY priv priv
 COPY assets assets
 
-RUN npm --cwd ./assets install --frozen-lockfile && \
+RUN yarn --cwd ./assets install --frozen-lockfile && \
       mix assets.deploy
 
 RUN mix release

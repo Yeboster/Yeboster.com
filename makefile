@@ -26,4 +26,4 @@ deps-mix: ## Setup mix dependencies
 	mix deps.get --force
 
 deps-node: ## Setup node dependencies
-	cd assets && npm install
+	cd assets && yarn --cwd ./assets install
