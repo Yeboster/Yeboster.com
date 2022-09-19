@@ -38,7 +38,7 @@ jobs:
       - name: Extract version
         id: version
         run: |
-          cat CHANGELOG.md
+          echo $(cat CHANGELOG.md | grep -Ei '## \d\.\d\.\d')
           echo ::set-output name=version::$(cat CHANGELOG.md | grep -Ei '## \d\.\d\.\d' | head -n 1 | cut -d '#' -f 3)
 
       - name: Extract metadata (tags, labels) for Docker
