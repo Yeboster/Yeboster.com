@@ -1,0 +1,9 @@
+@layer components {
+  .nav-active {
+    @apply gradient-text;
+  }
+
+  .nav-inactive {
+    @apply text-gray-600;
+  }
+}
