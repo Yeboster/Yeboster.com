@@ -1,5 +1,9 @@
 # Changelog
 
+## 1.0.3
+- Reorganize stylesheets
+- Show active path inside navbar
+
 ## 1.0.2
 - Fix share button
 - Minor update on about page
