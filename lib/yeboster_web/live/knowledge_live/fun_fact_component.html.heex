@@ -7,7 +7,7 @@
       <div class="px-0.5 text-xs text-gray-400">
         <form id="fact_id" phx-change="change_id" phx-target={@myself}>
           <label for="fact_id">nº</label>
-          <input class="w-8 text-center" type="text" name="fact_id" value={@fun_fact.id} phx-debounce="700">
+          <input class="w-10 text-center" type="text" name="fact_id" value={@fun_fact.id} phx-debounce="700">
         </form>
       </div>
     <% end %>
@@ -25,7 +25,7 @@
     <div class="flex flex-col items-center justify-center text-sm md:flex-row md:max-w-md">
       <%= if Map.has_key?(@fun_fact, :category) and Map.has_key?(@fun_fact.category, :name) do %>
         <form id="category" phx-change="change_category" phx-target={@myself}>
-          <select class="p-1 border-2 rounded-lg border-gray" name="category">
+          <select class="p-1 border-2 rounded-lg border-gray dark:border-gray-800" name="category">
             <%= for category <- @categories do %>
               <option value={category.name} selected={ selected_attr(category.name, @fun_fact.category.name) } >
                 #<%= category.name %>
@@ -40,15 +40,15 @@
         <div class="hidden v-divider md:inline-block"></div>
         <div class="mt-2 md:mt-0">
           <div class="flex items-center justify-center">
-            <div class="mr-2" id="reactions" phx-hook="remove_selected_emoji">
+            <div id="reactions" phx-hook="remove_selected_emoji">
               <%= for {reaction, index} <- Enum.with_index(@fun_fact.reactions) do %>
-                <span phx-click="remove_emoji" phx-value-emoji-index={index} phx-target={@myself}  class="mr-1 cursor-pointer">
+                <span phx-click="remove_emoji" phx-value-emoji-index={index} phx-target={@myself}  class="mr-2 cursor-pointer">
                   <%= render_emoji reaction  %>
                 </span>
               <% end %>
             </div>
             <form id="add_emoji" phx-change="add_emoji" phx-target={@myself}>
-              <select class="p-1 border-2 rounded-lg border-gray" name="emoji" id="emoji_select">
+              <select class="p-1 border-2 rounded-lg border-gray dark:border-gray-800" name="emoji" id="emoji_select">
                 <option value="" selected>Reaction</option>
                 <%= for emoji <- @emojis do %>
                   <option value={emoji.short_name}>

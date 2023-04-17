@@ -8,7 +8,7 @@
   }
 
   .placeholder {
-    @apply mx-auto bg-gray-100 w-60 h-5 animate-pulse;
+    @apply mx-auto bg-gray-100 dark:bg-gray-500 w-60 h-5 animate-pulse;
   }
 
   .divider {
@@ -28,10 +28,18 @@
   }
 
   .card-body {
-    @apply p-2 pt-6 rounded-md ring-2 ring-gray-900 ring-opacity-5 shadow-md;
+    @apply p-2 pt-6 bg-white dark:bg-gray-800 rounded-md ring-2 ring-gray-900 ring-opacity-5 shadow-md dark:ring-gray-100 dark:ring-opacity-10 dark:shadow-gray-600;
   }
 }
 
-a {
+body > a {
   @apply gradient-text;
+}
+
+select {
+  @apply dark:bg-gray-800;
+}
+
+input {
+  @apply p-2 border-gray-800 rounded-lg dark:text-white dark:bg-gray-800;
 }
