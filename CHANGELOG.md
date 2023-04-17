@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.1.0
+- Add dark mode
+
 ## 1.0.3
 - Reorganize stylesheets
 - Show active path inside navbar
