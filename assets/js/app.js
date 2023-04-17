@@ -10,12 +10,16 @@
 import "phoenix_html"
 
 // Setup LiveView
-import {Socket} from "phoenix"
-import {LiveSocket} from "phoenix_live_view"
+import { Socket } from "phoenix"
+import { LiveSocket } from "phoenix_live_view"
 import topbar from "../vendor/topbar"
+import { darkModeBootstrap } from "./src/darkmode"
+
+// Dark mode
+darkModeBootstrap()
 
 // Show progress bar on live navigation and form submits
-topbar.config({barColors: {0: "#510797"}, shadowColor: "rgba(0, 0, 0, .3)"})
+topbar.config({ barColors: { 0: "#510797" }, shadowColor: "rgba(0, 0, 0, .3)" })
 window.addEventListener("phx:page-loading-start", info => topbar.show())
 window.addEventListener("phx:page-loading-stop", info => topbar.hide())
 
@@ -31,7 +35,7 @@ Hooks.remove_selected_emoji = {
 }
 
 let csrfToken = document.querySelector("meta[name='csrf-token']").getAttribute("content")
-let liveSocket = new LiveSocket("/live", Socket, {params: {_csrf_token: csrfToken}, hooks: Hooks})
+let liveSocket = new LiveSocket("/live", Socket, { params: { _csrf_token: csrfToken }, hooks: Hooks })
 
 // Connect if there are any LiveViews on the page
 liveSocket.connect()
