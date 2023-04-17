@@ -3,6 +3,8 @@ version: "3.4"
 services:
   web:
     build: .
+    depends_on:
+      - db
     environment:
       PHX_HOST: localhost
       DATABASE_URL: ecto://yeboster:changeme@db/yeboster_dev
@@ -12,13 +14,13 @@ services:
     ports:
       - 4000:4000
   db:
-    image: postgres:12.4
+    image: postgres:14
     restart: on-failure
     environment:
       - POSTGRES_USER=yeboster
       - POSTGRES_PASSWORD=changeme
     ports:
-      - 5432:5432
+      - 5436:5432
     volumes:
       - pg_data:/var/lib/postgresql/data
 
