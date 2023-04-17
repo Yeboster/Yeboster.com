@@ -2,7 +2,10 @@ version: "3.4"
 
 services:
   web:
-    build: .
+    build:
+      context: .
+      dockerfile: Dockerfile
+      target: buider
     depends_on:
       - db
     environment:
