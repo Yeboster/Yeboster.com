@@ -7,7 +7,10 @@
     <%= navbar_link @conn, "Contact", to: Routes.page_path(@conn, :contact) %>
 
     <%= if function_exported?(Routes, :live_dashboard_path, 2) do %>
-    <%= navbar_link @conn, "Live Dashboard", to: Routes.live_dashboard_path(@conn, :home) %>
+      <%= navbar_link @conn, "Live Dashboard", to: Routes.live_dashboard_path(@conn, :home) %>
+    <% end %>
+
+    <%# Dark mode button %>
     <button id="theme-toggle" type="button"
         class="p-2 text-sm text-gray-500 rounded-lg dark:text-gray-400 hover:bg-gray-100 dark:hover:bg-gray-700 focus:outline-none focus:ring-4 focus:ring-gray-200 dark:focus:ring-gray-700 md:ml-2 max-w-5">
       <svg id="theme-toggle-dark-icon" class="hidden w-5 h-5" fill="currentColor" viewBox="0 0 20 20"
@@ -21,6 +24,5 @@
                 fill-rule="evenodd" clip-rule="evenodd"></path>
       </svg>
     </button>
-    <% end %>
   </nav>
 </header>
