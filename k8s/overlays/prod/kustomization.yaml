@@ -6,7 +6,7 @@ bases:
 images:
   - name: app-image
     newName: yeboster/yeboster.com
-    newTag: '1.1.1'
+    newTag: '1.2.0'
 resources:
   - ingress.k8s.yaml
   - secrets/app.sops.yaml
