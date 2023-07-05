@@ -1,5 +1,8 @@
 # Changelog
 
+## 1.2.0
+- Add Twitter
+
 ## 1.1.1
 - Fix dark mode button
 - Remove project roadmap
