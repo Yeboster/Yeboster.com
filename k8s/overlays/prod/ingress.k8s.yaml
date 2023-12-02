@@ -6,12 +6,8 @@ metadata:
     external-dns.alpha.kubernetes.io/target: "external.${SECRET_DOMAIN}"
 spec:
   ingressClassName: "external"
-  tls:
-    - hosts:
-      - "yeboster.com"
-      secretName: yeboster-tls
   rules:
-    - host: yeboster.com
+    - host: &host "${SECRET_DOMAIN}"
       http:
         paths:
           - path: /
@@ -21,3 +17,7 @@ spec:
                 name: app
                 port:
                   number: 4000
+  tls:
+    - hosts:
+        - *host
+      secretName: yeboster-tls
