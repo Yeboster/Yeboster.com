@@ -35,3 +35,5 @@ yeboster-*.tar
 
 # Ignore .env
 .env
+
+.decrypted*
