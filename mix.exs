@@ -33,23 +33,23 @@ defmodule Yeboster.MixProject do
   # Type `mix help deps` for examples and options.
   defp deps do
     [
-      {:phoenix, "~> 1.6.12"},
+      {:phoenix, "~> 1.7.10"},
       {:phoenix_ecto, "~> 4.4"},
       {:ecto_sql, "~> 3.6"},
       {:postgrex, ">= 0.0.0"},
-      {:phoenix_html, "~> 3.0"},
-      {:phoenix_live_reload, "~> 1.3.0", only: :dev},
-      {:phoenix_live_dashboard, "~> 0.6"},
-      {:phoenix_live_view, "~> 0.17.11"},
-      {:telemetry_metrics, "~> 0.6.0"},
+      {:phoenix_html, "~> 4.0"},
+      {:phoenix_live_reload, "~> 1.4.1", only: :dev},
+      {:phoenix_live_dashboard, "~> 0.8"},
+      {:phoenix_live_view, "~> 0.20.3"},
+      {:telemetry_metrics, "~> 0.6.2"},
       {:telemetry_poller, "~> 1.0"},
-      {:gettext, "~> 0.18"},
-      {:jason, ">= 1.2.0"},
-      {:plug_cowboy, "~> 2.5"},
-      {:exmoji, "~> 0.2.2"},
-      {:esbuild, "~> 0.4", runtime: Mix.env() == :dev},
-      {:floki, ">= 0.30.0", only: :test},
-      {:credo, "~> 1.5.5", only: [:dev, :test], runtime: false}
+      {:gettext, "~> 0.24"},
+      {:jason, ">= 1.4.1"},
+      {:plug_cowboy, "~> 2.6"},
+      {:exmoji, "~> 0.3"},
+      {:esbuild, "~> 0.8", runtime: Mix.env() == :dev},
+      {:floki, ">= 0.35.2", only: :test},
+      {:credo, "~> 1.7.3", only: [:dev, :test], runtime: false}
     ]
   end
 
